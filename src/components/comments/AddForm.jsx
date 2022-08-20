@@ -8,6 +8,35 @@ import styled from "styled-components";
 import Button from "../elements/Button";
 
 function AddForm({ post }) {
+  const { id } = useParams(); //postId
+  const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    setFocus,
+    reset,
+    formState: { isDirty, errors },
+  } = useForm({
+    mode: "onChange",
+  });
+
+  // const postId = post?.postid;
+
+  const onSubmitHandler = (formData, e) => {
+    e.preventDefault();
+    dispatch(
+      __addComment({
+        postId: id,
+        comment: formData.comment,
+      })
+    );
+    reset();
+  };
+
+  useEffect(() => {
+    setFocus("comment");
+  }, [setFocus]);
+
   return (
     <>
       <Container>
