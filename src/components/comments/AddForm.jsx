@@ -1,35 +1,27 @@
 import React, { useEffect } from "react";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { __addComment } from "../../redux/modules/commentSlice";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { __addComment } from "../../redux/modules/commentSlice";
 import Button from "../elements/Button";
 
-function AddForm({ post }) {
-  const { id } = useParams(); //postId
+function AddForm() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const {
     register,
     handleSubmit,
     setFocus,
     reset,
-    formState: { isDirty, errors },
+    formState: { errors },
   } = useForm({
     mode: "onChange",
   });
 
-  // const postId = post?.postid;
-
   const onSubmitHandler = (formData, e) => {
     e.preventDefault();
-    dispatch(
-      __addComment({
-        postId: id,
-        comment: formData.comment,
-      })
-    );
+    dispatch(__addComment({ comment: formData.comment }));
     reset();
   };
 
