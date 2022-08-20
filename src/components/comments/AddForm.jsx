@@ -32,16 +32,13 @@ function AddForm() {
   return (
     <>
       <Container>
-        <h2>댓글</h2>
         <Form onSubmit={handleSubmit(onSubmitHandler)}>
-          <Textarea
-            required
+          <Input
+            inputred
             type="text"
             placeholder={"댓글을 입력해주세요. (5-100자)"}
             name="comment"
-            aria-invalid={
-              !isDirty ? undefined : errors.comment ? "true" : "false"
-            }
+            aria-invalid={errors.comment ? "true" : "false"}
             {...register("comment", {
               required: "댓글은 필수 입력사항입니다.",
               minLength: {
@@ -89,7 +86,7 @@ const Form = styled.form`
   justify-content: center;
 `;
 
-const Textarea = styled.textarea`
+const Input = styled.input`
   width: 100%;
   height: 100px;
   border: 1px solid #d5d0d0;
@@ -98,7 +95,10 @@ const Textarea = styled.textarea`
   resize: none;
   background-color: transparent;
   font-size: large;
-  padding: 10px;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 1;
   &:focus {
     outline: none;
   }
