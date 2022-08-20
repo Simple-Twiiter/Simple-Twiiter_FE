@@ -25,13 +25,30 @@ function SignUpForm() {
     mode: "onChange",
   });
 
+  const onSubmitHandler = async (formData) => {
+    console.log(formData);
+    const file = watch("imageUrl");
+
+    const fd = new FormData();
+    fd.append("account", formData.account);
+    fd.append("password", formData.password);
+    fd.append("passwordCheck", formData.passwordCheck);
+    fd.append("imageUrl", file[0]);
+    const { data } = await axios({
+      method: "post",
+      url: `http://${URI.BASE}/api/user/signup`,
+      data: fd,
+    });
+    navigate("/");
+  };
+
   useEffect(() => {
     setFocus("username");
   }, [setFocus]);
 
   return (
     <SignUpView>
-      <Form onSubmit={handleSubmit()}>
+      <Form onSubmit={handleSubmit(onSubmitHandler)}>
         <Title>Sign Up</Title>
         <Container>
           <Label htmlFor="username">ID</Label>
