@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import styled from "styled-components";
 import { __addComment } from "../../redux/modules/commentSlice";
+import styled from "styled-components";
 import Button from "../elements/Button";
 
 function AddForm() {
@@ -51,15 +51,14 @@ function AddForm() {
               },
             })}
           />
-
-          <ButtonBox>
+          <Button type="submit" content={"등록"}></Button>
+          <ButtonWrapper>
             <ErrorMsg>
               {errors.comment && (
                 <small role="alert">{errors.comment.message}</small>
               )}
             </ErrorMsg>
-            <Button type="submit" content={"등록"}></Button>
-          </ButtonBox>
+          </ButtonWrapper>
         </Form>
       </Container>
     </>
@@ -71,8 +70,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   margin: 50px auto;
 `;
 
@@ -80,21 +79,21 @@ const Form = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 80%;
   height: 100px;
   border: 1px solid #d5d0d0;
   margin: 15px 0px;
   border-radius: 5px;
   resize: none;
   background-color: transparent;
-  font-size: large;
+  font-size: middle;
   border-left-width: 0;
   border-right-width: 0;
   border-top-width: 0;
@@ -104,7 +103,7 @@ const Input = styled.input`
   }
 `;
 
-const ButtonBox = styled.div`
+const ButtonWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
