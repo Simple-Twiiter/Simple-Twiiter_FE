@@ -11,9 +11,8 @@ import {
 } from "../../redux/modules/commentSlice";
 
 function Comment({ comment, post }) {
-  //   const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
-  const isLogin = true;
   const isMine = comment.isMine;
 
   const {
@@ -59,7 +58,7 @@ function Comment({ comment, post }) {
             <Writer> {comment.username}</Writer>
           </CommentUserProfile>
           <ButtonWrapper>
-            {isMine && !isEdit && (
+            {isLogin && isMine && !isEdit && (
               <CommentButton
                 onClick={() => {
                   isEditHandler(isEdit);
@@ -68,7 +67,7 @@ function Comment({ comment, post }) {
                 수정
               </CommentButton>
             )}
-            {isMine && (
+            {isLogin && isMine && (
               <CommentButton
                 onClick={() => {
                   onDeleteHandler();
