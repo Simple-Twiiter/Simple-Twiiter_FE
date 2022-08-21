@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { idCheck, passwordCheck } from "../../shared/regex";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../elements/Button";
+import RESP from "../../server/response";
 import axios from "axios";
 
 function SignUpForm() {
@@ -18,6 +19,7 @@ function SignUpForm() {
     register,
     handleSubmit,
     setFocus,
+    setValue,
     reset,
     watch,
     formState: { errors },
@@ -27,21 +29,53 @@ function SignUpForm() {
 
   const onSubmitHandler = async (formData) => {
     console.log(formData);
-    const file = watch("imageUrl");
+    const imageUrl = watch("imageUrl");
 
     const fd = new FormData();
     fd.append("account", formData.account);
     fd.append("password", formData.password);
     fd.append("passwordCheck", formData.passwordCheck);
-    fd.append("imageUrl", file[0]);
-    const { data } = await axios({
-      method: "post",
-      url: `http://${URI.BASE}/api/user/signup`,
-      data: fd,
-    });
+    fd.append("imageUrl", imageUrl[0]);
+    // const { result, data, message } = await axios({
+    //   method: "post",
+    //   url: `http://${URI.BASE}/api/user/signup`,
+    //   data: fd,
+    // });
+    const { result, data, message } = RESP.SIGN_UP_SUCCESS;
+    alert(message);
     navigate("/");
   };
 
+  const [imagePreview, setImagePreview] = useState("");
+  const imageUrl = watch("imageUrl");
+
+  const onSubmitFile = async () => {
+    const inputFile = document.getElementById("fileInput");
+
+    const formData = new FormData();
+    formData.append("file", imageUrl[0]);
+
+    // const {result, data, message} = await axios.post(`${apiURL}/api/image`, formData, {
+    //   withCredentials: false,
+    //   headers: {
+    //     "Access-Control-Allow-Origin": "*",
+    //   },
+    // });
+    const { result, data, message } = RESP.IMAGE_UPLOAD_SUCCESS;
+    if (result) {
+      setValue("thumbnail", data.imgUrl);
+    }
+  };
+
+  // 이미지 프리뷰
+  useEffect(() => {
+    if (imageUrl && imageUrl.length > 0) {
+      const file = imageUrl[0];
+      setImagePreview(URL.createObjectURL(file));
+    }
+  }, [imageUrl]);
+
+  // 초기 focus
   useEffect(() => {
     setFocus("username");
   }, [setFocus]);
@@ -144,12 +178,14 @@ function SignUpForm() {
           <Label htmlFor="imageUrl">PROFILE IMG</Label>
           <InputWrapper>
             <Input
-              type="file"
+              id="fileInput"
               accept="image/*"
               placeholder="이미지 파일"
-              {...register("imageUrl", {})}
+              type="file"
+              {...register("imageUrl")}
             />
           </InputWrapper>
+          <ImagePreview src={imagePreview} />
           <MsgWrapper>
             <Msg>
               {errors.imageUrl && (
@@ -228,6 +264,9 @@ const Input = styled.input`
     border-color: #40a9ff;
     border-right-width: 1px;
   }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const InputWrapper = styled.div`
@@ -268,6 +307,12 @@ const CorrectMsg = styled.p`
 const ErrorMsg = styled.p`
   font-size: 12px;
   color: ${({ theme }) => theme.errorTextColor};
+`;
+
+const ImagePreview = styled.img`
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
 `;
 
 const ButtonWrapper = styled.div`

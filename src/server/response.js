@@ -108,6 +108,14 @@ const RESP = {
       },
     ],
   },
+  IMAGE_UPLOAD_SUCCESS: {
+    result: true,
+    data: {
+      imgUrl:
+        "https://img.insight.co.kr/static/2020/07/15/700/2n2y4q9075jkn47sj3t9.jpg",
+    },
+    message: "이미지 업로드 성공",
+  },
 };
 
 export default RESP;
