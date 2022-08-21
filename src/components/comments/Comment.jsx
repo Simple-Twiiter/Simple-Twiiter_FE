@@ -1,28 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Button from "../elements/Button";
 import { useSelector, useDispatch } from "react-redux";
+import {
+  __deleteComment,
+  __updateComment,
+} from "../../redux/modules/commentSlice";
 
 function Comment({ comment, post }) {
   //   const isLogin = useSelector((state) => state.user.isLogin);
+  const dispatch = useDispatch();
   const isLogin = true;
   const isMine = comment.isMine;
-  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+  });
 
   const [isEdit, setEdit] = useState(false);
-  const [updateComment, setUpdateComment] = useState(comment.conetent);
+
   const isEditHandler = (isEdit) => {
     setEdit(!isEdit);
   };
 
-  const commentId = comment.commentId;
+  const commentId = comment.id;
 
-  const onUpdateHandler = () => {};
+  const onUpdateHandler = (formData) => {
+    dispatch(
+      __updateComment({ commentId: commentId, comment: formData.comment })
+    );
+    setEdit(false);
+  };
 
-  const onDeleteHandler = () => {};
+  const onDeleteHandler = () => {
+    dispatch(__deleteComment(commentId));
+  };
 
   return (
     <>
@@ -30,7 +50,12 @@ function Comment({ comment, post }) {
         <CommentHeader>
           <CommentUserProfile>
             {/* <User icon={faUser} /> */}
-            <Image src="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg" />
+            <ImgBox>
+              <Image
+                class="profile"
+                src="http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg"
+              />
+            </ImgBox>
             <Writer> {comment.username}</Writer>
           </CommentUserProfile>
           <ButtonWrapper>
@@ -44,33 +69,41 @@ function Comment({ comment, post }) {
               </CommentButton>
             )}
             {isMine && (
-              <CommentButton onClick={onDeleteHandler}>삭제</CommentButton>
+              <CommentButton
+                onClick={() => {
+                  onDeleteHandler();
+                }}
+              >
+                삭제
+              </CommentButton>
             )}
           </ButtonWrapper>
         </CommentHeader>
         {isEdit ? (
           <>
-            <CommentContent>
-              <Textarea
-                required
-                type="text"
-                placeholder={"댓글을 입력해주세요. (5-100자)"}
-                name="comment"
-                value={updateComment}
-                onChange={(e) => {
-                  setUpdateComment(e.target.value);
-                }}
-              />
-            </CommentContent>
-            <ButtonBox>
-              <Button
-                content={"취소"}
-                onClick={() => {
-                  isEditHandler(isEdit);
-                }}
-              />
-              <Button content={"댓글 수정"} onClick={onUpdateHandler} />
-            </ButtonBox>
+            <Form onSubmit={handleSubmit(onUpdateHandler)}>
+              <CommentContent>
+                <Textarea
+                  required
+                  type="text"
+                  placeholder={"댓글을 입력해주세요. (5-100자)"}
+                  name="comment"
+                  aria-invalid={errors.comment ? "true" : "false"}
+                  {...register("comment", {
+                    required: "댓글은 필수 입력사항입니다.",
+                  })}
+                />
+              </CommentContent>
+              <ButtonBox>
+                <Button
+                  content={"취소"}
+                  onClick={() => {
+                    isEditHandler(isEdit);
+                  }}
+                />
+                <Button type="submit" content={"댓글 수정"} />
+              </ButtonBox>
+            </Form>
             <Hr noshade />
           </>
         ) : (
@@ -85,6 +118,8 @@ function Comment({ comment, post }) {
 }
 
 export default Comment;
+
+const Form = styled.form``;
 
 const CommentView = styled.div`
   width: 40%;
@@ -138,10 +173,17 @@ const User = styled(FontAwesomeIcon)`
   padding: 10px;
 `;
 
-const Image = styled.img`
+const ImgBox = styled.div`
   width: 50px;
-  border-radius: 50px;
-  padding: 10px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const CommentContent = styled.div`
@@ -161,13 +203,12 @@ const Hr = styled.hr`
 const Textarea = styled.textarea`
   width: 100%;
   height: 60px;
-  border-radius: 5px;
   border: 0;
   resize: none;
   background-color: transparent;
-  font-size: medium;
+  font-size: small;
   padding: 10px;
-  border-bottom: teal 1px solid;
+  border-bottom: #d9d8d8 1px solid;
   &:focus {
     outline: none;
   }

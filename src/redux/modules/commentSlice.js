@@ -55,6 +55,46 @@ export const __addComment = createAsyncThunk(
   }
 );
 
+// 댓글 수정
+// /api/comment/{commentId}
+export const __updateComment = createAsyncThunk(
+  "UPDATE_COMMENT",
+  async (arg, thunkAPI) => {
+    try {
+      //   const { data } = axios({
+      //     method: "put",
+      //     url: `${URI.BASE}/api/comment/${arg.commentId}`,
+      //     data: {
+      //       contents: arg.comment,
+      //     },
+      //     headers: config,
+      //   });
+      const { data } = RES.UPDATE_COMMENT_SUCCESS2;
+      return thunkAPI.fulfillWithValue(data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
+//댓글 삭제
+// /api/comment/{commentId}
+export const __deleteComment = createAsyncThunk(
+  "DELETE_COMMENT",
+  async (arg, thunkAPI) => {
+    try {
+      //   await axios({
+      //     method: "delete",
+      //     url: `${URI.BASE}/api/comment/${arg}`,
+      //     headers: config,
+      //   });
+      return thunkAPI.fulfillWithValue(arg);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.code);
+    }
+  }
+);
+
 const initialState = {
   commentList: [],
   comment: {},
@@ -88,6 +128,35 @@ export const commentSlice = createSlice({
       state.commentList.push(action.payload);
     },
     [__addComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    // 댓글 수정 (U)
+    [__updateComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updateComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const target = state.commentList.findIndex(
+        (comment) => comment.id === action.payload.id
+      );
+      state.commentList.splice(target, 1, action.payload);
+    },
+    [__updateComment.rejected]: (state) => {
+      state.isLoading = true;
+    },
+    // 댓글 삭제 (D)
+    [__deleteComment.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      const target = state.commentList.findIndex(
+        (comment) => comment.id === action.payload
+      );
+      state.commentList.splice(target, 1);
+    },
+    [__deleteComment.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
