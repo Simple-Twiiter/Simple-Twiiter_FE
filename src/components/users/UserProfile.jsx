@@ -1,12 +1,27 @@
 import React from "react";
 import { Card, Avatar } from "antd";
 import Button from "../elements/Button";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/modules/userSlice";
+import RES from "../../server/response";
 
-function UserProfile({ setIsLogIn }) {
+function UserProfile() {
+  const dispatch = useDispatch();
   // 로그아웃
   const onLogoutHandler = () => {
     // axios 통신후 result가 true일 때
-    setIsLogIn(false);
+    // axios 통신후 결과가 true이면
+    // const { result, data, headers } = await axios.get(`http://3.39.229.105/api/logout`, {
+    //   headers: {
+    //     Authorization: localStorage.getItem("accessToken"),
+    //     RefreshToken: localStorage.getItem("refreshToken"),
+    //   },
+    // });
+    const { result, data, message } = RES.LOGOUT_SUCCESS;
+    dispatch(logout());
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    alert(message);
   };
   return (
     <Card
