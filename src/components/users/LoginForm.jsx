@@ -3,10 +3,14 @@ import { Form, Input } from "antd";
 import Button from "../elements/Button";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import RESP from "../../server/response";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/modules/userSlice";
 
-function LoginForm({ setIsLogIn }) {
-  const [user, setUser] = useState({ username: "", password: "" });
+function LoginForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [user, setUser] = useState({ username: "", password: "" });
 
   const onChangeHandler = useCallback(
     (e) => {
@@ -18,12 +22,28 @@ function LoginForm({ setIsLogIn }) {
 
   //  antd 는 e.preventDefault() 자동으로 탑재되어있으므로 안써도 됨
   const onSubmitHandler = useCallback(
-    (e) => {
-      console.log(user.username, user.password);
+    async (e) => {
       // axios 통신후 결과가 true이면
-      setIsLogIn(true);
+      // const { result, data, headers } = await axios({
+      //   method: "post",
+      //   url: `http://3.39.229.105/api/user/login`,
+      //   data: user,
+      // });
+
+      const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
+
+      if (result) {
+        const { authorization, refreshToken } = headers;
+        dispatch(login());
+        localStorage.setItem("accessToken", authorization);
+        localStorage.setItem("refreshToken", refreshToken);
+        alert(message);
+        navigate("/");
+      } else {
+        alert(message);
+      }
     },
-    [user.username, user.password, setIsLogIn]
+    [user.username, user.password]
   );
 
   return (
@@ -66,6 +86,7 @@ function LoginForm({ setIsLogIn }) {
 
 const FormWrapper = styled(Form)`
   padding: 10px;
+  width: 80%;
 `;
 
 const InputWrapper = styled.div``;

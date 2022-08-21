@@ -5,11 +5,11 @@ import { Menu, Input, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import UserProfile from "../users/UserProfile";
 import LoginForm from "../users/LoginForm";
-// import Link from "next/Link";
+import { useSelector } from "react-redux";
 const { Search } = Input;
 
 function SignUpLayout(props) {
-  const [isLogin, setIsLogIn] = useState(false);
+  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <Layouts>
       <Menu mode="horizontal">

@@ -5,11 +5,10 @@ import { Menu, Input, Row, Col } from "antd";
 import { Link } from "react-router-dom";
 import UserProfile from "../users/UserProfile";
 import LoginForm from "../users/LoginForm";
-// import Link from "next/Link";
-const { Search } = Input;
+import { useSelector } from "react-redux";
 
 function Layout(props) {
-  const [isLogin, setIsLogIn] = useState(false);
+  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <Layouts>
       <Menu mode="horizontal">
@@ -32,18 +31,12 @@ function Layout(props) {
       </Menu>
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLogin ? (
-            <UserProfile setIsLogIn={setIsLogIn} />
-          ) : (
-            <LoginForm setIsLogIn={setIsLogIn} />
-          )}
+          {isLogin ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col xs={24} md={12}>
           {props.children}
         </Col>
         <Col xs={24} md={6}>
-          {/* target="_blank" , 새 창을 연다 */}
-          {/* REL="_noreferrer noopener" , 이전페이지, 누가 나를 열었는지 */}
           <a
             href="https://https://github.com/Simple-Twiiter/Simple-Twiiter_FE"
             target="_blank"
