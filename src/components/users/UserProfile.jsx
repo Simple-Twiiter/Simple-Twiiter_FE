@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Avatar } from "antd";
 import Button from "../elements/Button";
 import { useDispatch } from "react-redux";
@@ -23,20 +23,28 @@ function UserProfile() {
     localStorage.removeItem("refreshToken");
     alert(message);
   };
+
+  // axios 통신 필요
+  const { result, data, message } = RES.GET_USER_PROFILE_SUCCESS;
+  // const { result, data, message } = RES.GET_USER_PROFILE_FAIL;
+  let { postCount, followingCount, followerCount } = data;
   return (
     <Card
       actions={[
         <div key="twit">
           글
-          <br />0
+          <br />
+          {postCount}
         </div>,
         <div key="following">
           팔로잉
-          <br />0
+          <br />
+          {followingCount}
         </div>,
         <div key="followings">
           팔로워
-          <br />0
+          <br />
+          {followerCount}
         </div>,
       ]}
     >
