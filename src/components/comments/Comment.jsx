@@ -18,7 +18,6 @@ function Comment({ comment, post }) {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -26,8 +25,8 @@ function Comment({ comment, post }) {
 
   const [isEdit, setEdit] = useState(false);
 
-  const isEditHandler = (isEdit) => {
-    setEdit(!isEdit);
+  const isEditHandler = () => {
+    setEdit((prev) => !prev);
   };
 
   const commentId = comment.id;
@@ -40,7 +39,12 @@ function Comment({ comment, post }) {
   };
 
   const onDeleteHandler = () => {
-    dispatch(__deleteComment(commentId));
+    const result = window.confirm("댓글을 삭제하겠습니까?");
+    if (result) {
+      dispatch(__deleteComment(commentId));
+    } else {
+      return;
+    }
   };
 
   return (
@@ -50,19 +54,13 @@ function Comment({ comment, post }) {
           <CommentUserProfile>
             {/* <User icon={faUser} /> */}
             <ImgBox>
-              <Image class="profile" src={comment.imageUrl} />
+              <Image class="profile" src={comment.member.userImg} />
             </ImgBox>
-            <Writer> {comment.username}</Writer>
+            <Writer> {comment.member.username}</Writer>
           </CommentUserProfile>
           <ButtonWrapper>
             {isLogin && isMine && !isEdit && (
-              <CommentButton
-                onClick={() => {
-                  isEditHandler(isEdit);
-                }}
-              >
-                수정
-              </CommentButton>
+              <CommentButton onClick={isEditHandler}>수정</CommentButton>
             )}
             {isLogin && isMine && (
               <CommentButton
@@ -91,12 +89,7 @@ function Comment({ comment, post }) {
                 />
               </CommentContent>
               <ButtonBox>
-                <Button
-                  content={"취소"}
-                  onClick={() => {
-                    isEditHandler(isEdit);
-                  }}
-                />
+                <Button content={"취소"} onClick={isEditHandler} />
                 <Button type="submit" content={"댓글 수정"} />
               </ButtonBox>
             </Form>
