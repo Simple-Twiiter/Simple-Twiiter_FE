@@ -27,30 +27,47 @@
     {
       "contents": "sssssssssss",
       "id": 7
+    },
+    {
+      "contents": "SDDADADADAD",
+      "id": 8
+    },
+    {
+      "contents": "ADSDSADASDSADSA",
+      "id": 9
+    },
+    {
+      "contents": "ASDADSADSADAD",
+      "id": 10
+    }
+  ],
   "data": [
     {
       "id": 1,
-      "username": "김삿갓",
+      "username": "Crystal",
       "title": "제목1",
       "contents": "내용1",
-      "imgUrl": "abc1.com",
-      "createdAt": "YYYY-MM-DD hh:mm”(LocalDateTime)"
+      "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      "createdAt": "YYYY-MM-DD hh:mm",
+      "isMine": true
     },
     {
       "id": 2,
-      "username": "삼겹살",
+      "username": "Crystal",
       "title": "제목2",
       "contents": "내용2",
-      "imgUrl": "abc2.com",
-      "createdAt": "YYYY-MM-DD hh:mm”(LocalDateTime)"
+      "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      "createdAt": "YYYY-MM-DD hh:mm",
+      "isMine": true
     },
     {
       "id": 3,
       "username": "참이슬",
       "title": "제목3",
       "contents": "내용3",
-      "imgUrl": "abc3.com",
-      "createdAt": "YYYY-MM-DD hh:mm”(LocalDateTime)"
+      "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      "createdAt": "YYYY-MM-DD hh:mm",
+      "isMine": false
     }
   ]
 }
