@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux/es/exports";
-import { __postPost } from "../../redux/modules/postSlice"
-
+import { __postPost } from "../../redux/modules/postSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Create() {
-
   const dispatch = useDispatch();
-
+  const imageUrl = useRef(null);
   const [createPost, setCreatePost] = useState({
     title: "",
     contents: "",
-    imgUrl: "",
   });
+  const [imgUrl, setImgUrl] = useState();
 
   const onChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -21,68 +20,69 @@ function Create() {
       [name]: value,
     });
   };
-// console.log(createPost)
+  // console.log(createPost)
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+    const imgUrl = imageUrl.current.value;
+
+    const fd = new FormData();
+    fd.append("data", createPost);
+    fd.append("imageUrl", imgUrl[0]);
+    console.log(imgUrl);
+
     if (
       createPost.title.trim() === "" ||
-      createPost.contents.trim() === "" 
+      createPost.contents.trim() === ""
       // createPost.imgUrl.trim() === ""
     ) {
       return alert("모든 항목을 입력해주세요.");
     }
-    dispatch(__postPost(createPost));
+    dispatch(__postPost(fd));
     setCreatePost({ title: "", contents: "", imgUrl: "" });
   };
-  
-  // useEffect(() => {
-  //   dispatch(__postPost());
-  // }, [dispatch]);
 
-  
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      let img = event.target.files[0];
+      setImgUrl(URL.createObjectURL(img));
+    }
+  };
 
   return (
     <div>
-      <StCreateBox>Create
+      <StCreateBox>
+        Create
         <form onSubmit={onSubmitHandler}>
-        <div>
-          <Input
-          name="title"
-          type="text"
-          value={createPost.title}
-          onChange={onChangeHandler}
-          placeholder="제목 입력해라"
-        />
-        </div>
-        <div>
-          <Input
-          name="contents"
-          type="text"
-          value={createPost.contents}
-          onChange={onChangeHandler}
-          placeholder="내용 입력해라"
-        />
-        </div>
+          <div>
+            <input
+              name="title"
+              type="text"
+              value={createPost.title}
+              onChange={onChangeHandler}
+              placeholder="제목"
+            />
+          </div>
+          <div>
+            <input
+              name="contents"
+              type="text"
+              value={createPost.contents}
+              onChange={onChangeHandler}
+              placeholder="오늘은 어떤 일이 일어나고 있나요?"
+            />
+          </div>
 
-        <TwitBox>
-        <div>
-          <input
-          name="imgUrl"
-          type="file"
-          value={createPost.imgUrl}
-          onChange={onChangeHandler}
-          placeholder="이미지 입력해라"
-        />
-        </div>
-        
-          <StButton>Tweet</StButton>
-
-        </TwitBox>
-          
-        
-        
-
+          <div>
+            <input
+              id="imgUrl"
+              accept="image/*"
+              type="file"
+              onChange={onImageChange}
+              placeholder="이미지"
+            />
+          </div>
+          <button>추가하자</button>
         </form>
       </StCreateBox>
     </div>
@@ -154,3 +154,6 @@ const TwitBox = styled.div`
   margin-top : 5px;
 
 `
+const Icon = styled(FontAwesomeIcon)`
+  color: #5d5fef;
+`;

@@ -9,11 +9,13 @@ import {
 } from "../../redux/modules/postSlice";
 
 function DetailInfo() {
+  const isLogin = useSelector((state) => state.user.isLogin);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const params = useParams();
   const param = parseInt(params.id);
   const twitDetail = useSelector((state) => state.post.singlePost);
+  const isMine = twitDetail.isMine;
 
   const [isShow, setIsShow] = useState(false);
 
@@ -29,7 +31,7 @@ function DetailInfo() {
   });
 
   useEffect(() => {
-    dispatch(__getSinglePost(param));
+    dispatch(__getSinglePost({ postId: param }));
   }, [dispatch]);
 
   const deleteHandler = () => {
@@ -54,7 +56,10 @@ function DetailInfo() {
       dispatch(
         __updatePost({
           id: param,
-          ...newTwit,
+          data: {
+            title: newTwit.title,
+            contents: newTwit.contents,
+          },
         })
       );
     }
@@ -75,8 +80,7 @@ function DetailInfo() {
             <Stkim>
               <StkimProp onClick={openbox}>...</StkimProp>
             </Stkim>
-
-            {!isShow ? null : (
+            {isLogin && isMine && isShow && (
               <StUpdateBox>
                 <button onClick={onEditHandler}>수정</button>
                 <button
@@ -95,9 +99,13 @@ function DetailInfo() {
               </StUpdateBox>
             )}
 
+           <UserImgBox>
+              <UserImage src={twitDetail.member?.userImg}></UserImage>
+            </UserImgBox>
+            <div>{twitDetail.member?.username}</div>
             <div>{twitDetail.title}</div>
-            <div>{twitDetail.contents}</div>
-            <div>{twitDetail.imgUrl}</div>
+            <div>{twitDetail.content}</div>
+            <Img src={twitDetail.imgUrl}></Img>
             <div>{twitDetail.createdAt}</div>
           </StDetailInfo>
         </div>
@@ -122,8 +130,6 @@ function DetailInfo() {
               />
             </div>
 
-            {/* <div>{twitDetail.createdAt}</div> */}
-
             <div>
               <button onClick={onEditHandler}>저장하기</button>
               <br />
@@ -140,7 +146,7 @@ export default DetailInfo;
 
 const StDetailInfo = styled.div`
   width: 100%;
-  height: 200px;
+  height: 500px;
   border-radius: 10px;
   border: 2px solid #eee;
   margin: auto;
@@ -231,4 +237,21 @@ const StUpdateBox = styled.div`
   }    
 `;
 
+const Img = styled.img`
+  width: 80%;
+  height: 60%;
+`;
+
+const UserImgBox = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+`;
+
+const UserImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 

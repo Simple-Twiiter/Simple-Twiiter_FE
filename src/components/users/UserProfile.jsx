@@ -2,11 +2,16 @@ import React, { useEffect } from "react";
 import { Card, Avatar } from "antd";
 import Button from "../elements/Button";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/modules/userSlice";
 import RES from "../../server/response";
+import { useSelector } from "react-redux";
 
 function UserProfile() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userInfo = useSelector((state) => state.user.isUser);
+  console.log(userInfo);
   // 로그아웃
   const onLogoutHandler = () => {
     // axios 통신후 result가 true일 때
@@ -22,6 +27,7 @@ function UserProfile() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
     alert(message);
+    navigate("/");
   };
 
   // axios 통신 필요

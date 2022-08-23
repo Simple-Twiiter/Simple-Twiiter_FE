@@ -1,22 +1,17 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useState } from "react";
 import styled from "styled-components";
 import Twit from "./Twit";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPost } from "../../redux/modules/postSlice";
 
-
-
 function TwitList() {
   const dispatch = useDispatch();
   const twits = useSelector((state) => state.post.list);
-
-  // console.log(twits)
-
-
+  const [page, setPage] = useState(0);
+  const pageSize = 5;
   useEffect(() => {
-    dispatch(__getPost());
+    dispatch(__getPost({ page: page, pageSize: pageSize }));
   }, [dispatch]);
-
 
   return (
     <div>
@@ -38,9 +33,8 @@ export default TwitList;
 
 const TwitListBox = styled.div`
   width: 90%;
-  /* height: 700px; */
-  /* border-radius: 10px; */
-  /* border: 2px solid #eee; */
+  border-radius: 10px;
+  border: 2px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
