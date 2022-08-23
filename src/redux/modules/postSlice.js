@@ -12,7 +12,7 @@ export const __getPost = createAsyncThunk(
     "post/__getPost",
     async (extr, thunkAPI) => {
       try {
-        const { data } = await axios.get("http://localhost:3001/data");
+        const { data } = await axios.get("http://localhost:5002/data");
         
         // console.log(data);
         // return thunkAPI.fulfillWithValue(data.data);
@@ -30,7 +30,7 @@ export const __getSinglePost = createAsyncThunk(
       // //console.log("args:", args);
       // const targetId = args.id;
       
-      const response = await axios.get(`http://localhost:3001/data/${args}`);
+      const response = await axios.get(`http://localhost:5002/data/${args}`);
       // console.log(response)
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
@@ -44,7 +44,7 @@ export const __postPost = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
         
-      const { data } = await axios.post("http://localhost:3001/data", arg);
+      const { data } = await axios.post("http://localhost:5002/data", arg);
     //  console.log(response)
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
@@ -58,7 +58,7 @@ export const __deletePost = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       console.log(arg)
-      await axios.delete(`http://localhost:3001/data/${arg}`);
+      await axios.delete(`http://localhost:5002/data/${arg}`);
       // console.log(response)
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
@@ -88,7 +88,7 @@ export const __updatePost = createAsyncThunk(
       const id = arg.id;
       console.log(arg)
       // const { title, contents } = { ...arg };
-      const response = await axios.put(`http://localhost:3001/data/${id}`,{
+      const response = await axios.put(`http://localhost:5002/data/${id}`,{
           title : arg.title,
           contents : arg.contents,
         });

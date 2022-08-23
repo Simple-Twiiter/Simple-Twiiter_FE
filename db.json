@@ -1,5 +1,5 @@
 {
-    "commentList": [
+  "commentList": [
     {
       "contents": "ㄴㅁㅇㄴㅇㅁㅇㅁㄴㅁㄴㅇ",
       "id": 1
@@ -31,12 +31,9 @@
   ],
   "data": [
     {
-      "id": 1,
-      "username": "김삿갓",
-      "title": "제목1",
-      "contents": "내용1",
-      "imgUrl": "abc1.com",
-      "createdAt": "YYYY-MM-DD hh:mm”(LocalDateTime)"
+      "title": "기분이 좋다",
+      "contents": "야호",
+      "id": 1
     },
     {
       "id": 2,
