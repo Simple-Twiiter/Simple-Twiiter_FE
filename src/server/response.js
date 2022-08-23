@@ -122,6 +122,86 @@ const RESP = {
         createdAt: "YYYY-MM-DD",
         modifiedAt: "YYYY-MM-DD",
       },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 4,
+        title: "게시글4",
+        content: "게시글 등록4",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 5,
+        title: "게시글5",
+        content: "게시글 등록5",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 6,
+        title: "게시글6",
+        content: "게시글 등록6",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 7,
+        title: "게시글7",
+        content: "게시글 등록7",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 8,
+        title: "게시글8",
+        content: "게시글 등록8",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
     ],
   },
 
