@@ -1,26 +1,29 @@
 import { useState } from "react";
 import RESP from "../../server/response";
 import Button from "./Button";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // ♡
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // ♥︎import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const FollowButton = ({ isFollow, isLogin, postId }) => {
+const LikeBtn = ({ isLike, isLogin, postId }) => {
   // ${URI.BASE}
   const URI = {
     BASE: process.env.REACT_APP_BASE_URI,
   };
   // 좋아요
-  const [isfollowed, setIsFollowed] = useState(isFollow);
+  const [liked, setLiked] = useState(isLike);
 
-  const toggleFollow = async () => {
+  const toggleLike = async () => {
     if (!isLogin) {
       alert("로그인을 해주세요!");
       return;
     }
 
-    if (!isfollowed) {
+    if (!liked) {
       // const { result, data, message } = await axios({
       //     method: "post",
-      //     url: `${URI.BASE}/api/follow`,
+      //     url: `${URI.BASE}/api/postLike/${postId}`,
       //     data: {
       //       contents: arg.comment,
       //     },
@@ -36,11 +39,11 @@ const FollowButton = ({ isFollow, isLogin, postId }) => {
       //   return;
       // }
 
-      setIsFollowed(data);
+      setLiked(data);
     } else {
       // const { result, data, message } = await axios({
       //     method: "post",
-      //     url: `${URI.BASE}/api/follow`,
+      //     url: `${URI.BASE}/api/postLike/${postId}`,
       //     data: {
       //       contents: arg.comment,
       //     },
@@ -53,24 +56,28 @@ const FollowButton = ({ isFollow, isLogin, postId }) => {
       // success
       const { result, data, message } = RESP.UNLIKE_SUCCESS;
 
-      setIsFollowed(data);
+      setLiked(data);
     }
   };
 
   return (
     <>
-      {!isfollowed ? (
+      {!liked ? (
         <>
-          <Button content={"팔로우"} onClick={toggleFollow} />
-          <FontAwesomeIcon icon="fa-solid fa-heart" />
+          <HeartIcon icon={regularHeart} onClick={toggleLike} />
         </>
       ) : (
         <>
-          <Button content={"팔로우 취소"} onClick={toggleFollow} />
+          <HeartIcon icon={solidHeart} onClick={toggleLike} />
         </>
       )}
     </>
   );
 };
 
-export default FollowButton;
+const HeartIcon = styled(FontAwesomeIcon)`
+  font-size: 18px;
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export default LikeBtn;
