@@ -36,6 +36,7 @@ function LoginForm() {
         dispatch(login(data));
         localStorage.setItem("accessToken", authorization);
         localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("username", data.username);
         alert(message);
         navigate("/");
       } else {

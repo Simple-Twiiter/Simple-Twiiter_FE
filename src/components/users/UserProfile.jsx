@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/modules/userSlice";
 import RES from "../../server/response";
 import { useSelector } from "react-redux";
+import { __getSingleUser } from "../../redux/modules/userSlice";
 
 function UserProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userInfo = useSelector((state) => state.user.isUser);
-  console.log(userInfo);
+  const username = localStorage.getItem("username");
+  const userInfoCount = useSelector((state) => state.user.userInfoCount);
+  console.log(username);
   // 로그아웃
   const onLogoutHandler = () => {
     // axios 통신후 result가 true일 때
@@ -30,27 +32,27 @@ function UserProfile() {
     navigate("/");
   };
 
-  // axios 통신 필요
-  const { result, data, message } = RES.GET_USER_PROFILE_SUCCESS;
-  // const { result, data, message } = RES.GET_USER_PROFILE_FAIL;
-  let { postCount, followingCount, followerCount } = data;
+  useEffect(() => {
+    dispatch(__getSingleUser({ memberId: username }));
+  });
+
   return (
     <Card
       actions={[
         <div key="twit">
           글
           <br />
-          {postCount}
+          {userInfoCount.postCount}
         </div>,
         <div key="following">
           팔로잉
           <br />
-          {followingCount}
+          {userInfoCount.followingCount}
         </div>,
         <div key="followings">
           팔로워
           <br />
-          {followerCount}
+          {userInfoCount.followerCount}
         </div>,
       ]}
     >
