@@ -16,7 +16,6 @@ function TwitList() {
   return (
     <div>
       <TwitListBox>
-        TwitList
         {twits &&
           twits.map((twit) => {
             return (
@@ -34,12 +33,12 @@ export default TwitList;
 
 const TwitListBox = styled.div`
   width: 100%;
-  height: 700px;
-  border-radius: 10px;
-  border: 2px solid #eee;
+  /* border-radius: 10px; */
+  border: 1px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  border-collapse: collapse;
 `;

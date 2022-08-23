@@ -20,15 +20,9 @@ function Twit({ twit }) {
   return (
     <>
       <TwitBox onClick={() => navigate(`/detail/${twit.id}`)}>
-        <UserImgBox>
-          <UserImage src={twit.member.userImg}></UserImage>
-        </UserImgBox>
-        <h3>{twit.member.username}</h3>
-        <div>{twit.title}</div>
-        <div>{twit.content}</div>
-        <Img src={twit.imgUrl} />
-        {isLogin && isMine && (
-          <button
+        <StTwitTitle>
+          {isLogin && isMine && (
+          <StTitleButton
             onClick={(event) => {
               event.stopPropagation();
               const result = window.confirm("진짜로 삭제하시겠습니까?");
@@ -39,9 +33,19 @@ function Twit({ twit }) {
               }
             }}
           >
-            삭제 버튼
-          </button>
+            ✖
+          </StTitleButton>
         )}
+        </StTwitTitle>
+      
+        <UserImgBox>
+          <UserImage src={twit.member.userImg}></UserImage>
+        </UserImgBox>
+        <h3>{twit.member.username}</h3>
+        <div>{twit.title}</div>
+        <div>{twit.content}</div>
+        <Img src={twit.imgUrl} />
+        
         <h3>{twit.createdAt}</h3>
       </TwitBox>
       <ButtonsWrapper>
@@ -62,21 +66,20 @@ export default Twit;
 
 const TwitBox = styled.div`
   width: 100%;
-  border-radius: 10px;
-  border: 2px solid #eee;
+  /* border-radius: 10px; */
+  border: 1px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
-  align-items: center;
+  align-items: flex-start;
+  border-collapse: collapse;
+  
   cursor: pointer;
-
-  &:hover {
-    background-color: rgba(252, 237, 239, 0.3);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
-      rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
-      rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color: #ee0000;
+  &:hover{  
+    background-color: rgba(210, 210, 210, 0.08);
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    color: black;
   }
 `;
 
@@ -90,7 +93,7 @@ const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid #9e9999;
+  /* border: 1px solid #9e9999; */
   margin-bottom: 30px;
   padding: 10px;
 `;
@@ -106,4 +109,39 @@ const UserImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+`;
+
+
+
+const StTwitTitle = styled.div`
+  display:flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+`
+
+
+const StTitleButton = styled.button`
+  width: 35px;
+  height: 35px;
+  /* border: 1px solid #eee; */
+  border : none;
+  /* border: 0;
+  outline: 0; */
+  border-radius: 50%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  /* margin-bottom: 5px; */
+  cursor: pointer;
+  background-color : white;
+  /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
+  &:hover{  
+    background-color: rgba(210, 210, 210, 0.5);
+    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
+    color : black;
+  }
 `;

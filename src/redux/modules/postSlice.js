@@ -19,7 +19,6 @@ const config = {
   RefreshToken: localStorage.getItem("refreshToken"),
 };
 
-// 서버에 연결하기 좋게 URL은 나중에 바꾸기
 export const __getPost = createAsyncThunk(
   "post/__getPost",
   async (arg, thunkAPI) => {

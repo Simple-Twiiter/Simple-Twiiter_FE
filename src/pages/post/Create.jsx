@@ -58,6 +58,7 @@ function Create() {
           placeholder="내용"
           required
           {...register("contents")}
+          placeholder="오늘은 어떤 일이 일어나고 있나요?"
         />
         <Input
           id="fileInput"
@@ -76,15 +77,48 @@ function Create() {
 export default Create;
 
 const StCreateBox = styled.div`
-  width: 90%;
-  border: 2px solid #eee;
+  width: 100%;
+  height: 130px;
+  /* border-radius: 10px; */
+  border: 1px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
+  border-collapse: collapse;
 `;
+
+const Input = styled.input`
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-variant: tabular-nums;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  padding: 4px 11px;
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  line-height: 1.5715;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  transition: all 0.3s;
+  &:hover {
+    border-color: #40a9ff;
+    border-right-width: 1px;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
 
 const Form = styled.form`
   width: 100%;
@@ -125,14 +159,14 @@ const Input = styled.input`
 `;
 
 const StButton = styled.button`
-  width: 70px;
-  height: 30px;
-  background: #00acee;
-  border-radius: 20px;
-  color: #fff;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: #0075a2;
+  width : 70px;
+  height : 30px ;
+  background: #00ACEE;
+	border-radius: 20px;
+	color: #fff;
+	border-width: 0.5px;
+	border-style: solid;
+	border-color: #0075a2;
   &:hover {
     border-color: #40a9ff;
     border-right-width: 1px;
@@ -147,6 +181,14 @@ const TwitBox = styled.div`
   align-items: center;
   margin-top: 5px;
 `;
+
+`
+
+const TwitBox = styled.div`
+  display:flex;
+  margin-top : 5px;
+
+`
 const Icon = styled(FontAwesomeIcon)`
   color: #5d5fef;
 `;

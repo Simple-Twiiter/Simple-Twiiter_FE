@@ -43,10 +43,9 @@
   ],
   "data": [
     {
-      "id": 1,
+      "title": "기분이 좋다",
+      "contents": "야호",
       "username": "Crystal",
-      "title": "제목1",
-      "contents": "내용1",
       "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
       "createdAt": "YYYY-MM-DD hh:mm",
       "isMine": true
