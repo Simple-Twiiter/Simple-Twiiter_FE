@@ -27,6 +27,11 @@ function Create() {
   const [imagePreview, setImagePreview] = useState("");
   const imageUrl = watch("imageUrl");
 
+  const handleClick = (e) => {
+    let myInput = document.getElementById("fileInput");
+    myInput.click();
+  };
+
   const onSubmitHandler = (formData) => {
     const fd = new FormData();
     fd.append("data", formData);
@@ -65,7 +70,9 @@ function Create() {
           placeholder="이미지 파일"
           type="file"
           {...register("imageUrl")}
+          style={{ display: "none" }}
         />
+        <button onClick={handleClick}>upload a file</button>
         <ImagePreview src={imagePreview} />
         <button type="submit">Tweet</button>
       </Form>
@@ -77,7 +84,6 @@ export default Create;
 
 const StCreateBox = styled.div`
   width: 100%;
-  height: 130px;
   /* border-radius: 10px; */
   border: 1px solid #eee;
   margin: auto;
