@@ -130,11 +130,10 @@ function DetailInfo() {
               />
             </div>
 
-            <div>
+            <StControlButtons>
               <button onClick={onEditHandler}>저장하기</button>
-              <br />
               <button onClick={onCancelButtonHandler}>취소하기</button>
-            </div>
+            </StControlButtons>
           </StDetailInfo>
         </div>
       )}
@@ -146,7 +145,7 @@ export default DetailInfo;
 
 const StDetailInfo = styled.div`
   width: 100%;
-  height: 500px;
+  /* height: 500px; */
   border-radius: 10px;
   border: 2px solid #eee;
   margin: auto;
@@ -154,11 +153,7 @@ const StDetailInfo = styled.div`
   flex-direction: column;
   align-content: center;
   align-items: center;
-  .btnBox {
-    width: 150px;
-    height: 150px;
-    border: 1px solid;
-  }
+  
 `;
 
 const Input = styled.input`
@@ -230,7 +225,7 @@ const StUpdateBox = styled.div`
   align-items: center;
   cursor: pointer;
   &:hover{  
-    background-color: rgba(252, 237, 239, 0.3);
+    background-color: white;
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
     color : black;
   }
@@ -255,3 +250,32 @@ const UserImage = styled.img`
   object-fit: cover;
 `;
 
+const StControlButtons = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  button {
+    width: 100px;
+  height: 50px;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color : white;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  &:hover{  
+    background-color: rgba(252, 237, 239, 0.3);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    color : black;
+  }
+  }
+
+`

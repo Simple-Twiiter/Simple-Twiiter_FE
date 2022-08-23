@@ -32,12 +32,13 @@ function TwitList() {
 export default TwitList;
 
 const TwitListBox = styled.div`
-  width: 90%;
-  border-radius: 10px;
-  border: 2px solid #eee;
+  width: 100%;
+  /* border-radius: 10px; */
+  border: 1px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  border-collapse: collapse;
 `;
