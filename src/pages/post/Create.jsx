@@ -50,12 +50,12 @@ function Create() {
   };
 
   return (
-    <div>
+    
       <StCreateBox>
         Create
         <form onSubmit={onSubmitHandler}>
           <div>
-            <input
+            <Input
               name="title"
               type="text"
               value={createPost.title}
@@ -64,7 +64,7 @@ function Create() {
             />
           </div>
           <div>
-            <input
+            <Input
               name="contents"
               type="text"
               value={createPost.contents}
@@ -81,26 +81,28 @@ function Create() {
               onChange={onImageChange}
               placeholder="이미지"
             />
+            <StButton>Tweet</StButton>
           </div>
-          <button>추가하자</button>
+          
         </form>
       </StCreateBox>
-    </div>
+    
   );
 }
 
 export default Create;
 
 const StCreateBox = styled.div`
-  width: 90%;
+  width: 100%;
   height: 130px;
   /* border-radius: 10px; */
-  border: 2px solid #eee;
+  border: 1px solid #eee;
   margin: auto;
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  border-collapse: collapse;
 `;
 
 const Input = styled.input`
