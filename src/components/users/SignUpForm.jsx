@@ -49,24 +49,6 @@ function SignUpForm() {
   const [imagePreview, setImagePreview] = useState("");
   const imageUrl = watch("imageUrl");
 
-  // const onSubmitFile = async () => {
-  //   const inputFile = document.getElementById("fileInput");
-
-  //   const formData = new FormData();
-  //   formData.append("file", imageUrl[0]);
-
-  //   // const {result, data, message} = await axios.post(`${apiURL}/api/image`, formData, {
-  //   //   withCredentials: false,
-  //   //   headers: {
-  //   //     "Access-Control-Allow-Origin": "*",
-  //   //   },
-  //   // });
-  //   const { result, data, message } = RESP.IMAGE_UPLOAD_SUCCESS;
-  //   if (result) {
-  //     setValue("thumbnail", data.imgUrl);
-  //   }
-  // };
-
   // 이미지 프리뷰
   useEffect(() => {
     if (imageUrl && imageUrl.length > 0) {
