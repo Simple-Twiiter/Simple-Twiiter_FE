@@ -42,12 +42,171 @@ const RESP = {
     message: "회원가입 실패",
   },
 
+  //POST_APIS
+  ADD_POST_SUCCESS: {
+    message: "게시글 등록에 성공했습니다!",
+    result: true,
+    data: {
+      member: {
+        username: "crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
+      id: 4,
+      title: "게시글 테스트 등록 성공",
+      content: "게시글 테스트 등록 성공",
+      imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      isMine: true,
+      isLike: false,
+      isFollow: false,
+      createdAt: "YYYY-MM-DD",
+      modifiedAt: "YYYY-MM-DD",
+    },
+  },
+
+  ADD_POST_FAIL: {
+    message: "게시글 등록에 실패했습니다!",
+    result: false,
+    data: null,
+  },
+
+  GET_POSTS_SUCCESS: {
+    message: "게시글 리스트 가져오기에 성공했습니다",
+    result: true,
+    data: [
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 1,
+        title: "게시글1",
+        content: "게시글 등록1",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "박용원",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 2,
+        title: "게시글2",
+        content: "게시글 등록2",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: false,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+      {
+        member: {
+          username: "crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        id: 3,
+        title: "게시글3",
+        content: "게시글 등록3",
+        imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+        isMine: true,
+        isLike: false,
+        isFollow: false,
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
+      },
+    ],
+  },
+
+  GET_POSTS_FAIL: {
+    message: "게시글 리스트 가져오기에 실패했습니다",
+    result: false,
+    data: null,
+  },
+
+  GET_POST_SUCCESS: {
+    message: "요청에 성공했습니다",
+    result: true,
+    data: {
+      member: {
+        username: "crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
+      id: 1,
+      title: "디테일 페이지",
+      content: "디테일 페이지",
+      imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      isMine: true,
+      isLike: false,
+      isFollow: false,
+      createdAt: "YYYY-MM-DD",
+      modifiedAt: "YYYY-MM-DD",
+    },
+  },
+
+  DELETE_POST_FAIL: {
+    message: "요청에 실패했습니다.",
+    result: false,
+    data: null,
+  },
+
+  DELETE_POST_SUCCESS: {
+    message: "게시글 삭제에 성공했습니다",
+    result: true,
+    data: null,
+  },
+
+  DELETE_POST_FAIL: {
+    message: "게시글 삭제에 실패했습니다",
+    result: false,
+    data: null,
+  },
+
+  UPDATE_POST_SUCCESS: {
+    message: "게시글 수정에 성공했습니다!",
+    result: true,
+    data: {
+      member: {
+        username: "crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
+      id: 1,
+      title: "게시글 수정",
+      content: "게시글 수정",
+      imgUrl: "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
+      isMine: true,
+      isLike: false,
+      isFollow: false,
+      createdAt: "YYYY-MM-DD",
+      modifiedAt: "YYYY-MM-DD",
+    },
+  },
+
+  UPDATE_POST_FAIL: {
+    message: "게시글 삭제에 실패했습니다",
+    result: false,
+    data: null,
+  },
+
   // COMMENT APIS
   ADD_COMMENT_SUCCESS: {
     result: true,
     data: {
       id: 1,
-      username: "Crystal",
+      member: {
+        username: "Crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
       createdAt: "YYYY-MM-DD hh:mm",
       modifiedAt: "YYYY-MM-DD hh:mm",
       contents: "댓글댓글댓글댓글",
@@ -66,9 +225,13 @@ const RESP = {
     result: true,
     data: {
       id: 1,
-      username: "Crystal",
-      createdAt: "YYYY-MM-DD hh:mm",
-      modifiedAt: "YYYY-MM-DD hh:mm",
+      member: {
+        username: "Crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
+      createdAt: "YYYY-MM-DD",
+      modifiedAt: "YYYY-MM-DD",
       contents: "댓글댓글댓글댓글",
       isMine: "true",
       imageUrl:
@@ -81,9 +244,13 @@ const RESP = {
     result: true,
     data: {
       id: 2,
-      username: "Crystal",
-      createdAt: "YYYY-MM-DD hh:mm",
-      modifiedAt: "YYYY-MM-DD hh:mm",
+      member: {
+        username: "Crystal",
+        userImg:
+          "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+      },
+      createdAt: "YYYY-MM-DD",
+      modifiedAt: "YYYY-MM-DD",
       contents: "댓글2댓글2댓글2댓글",
       isMine: "true",
       imageUrl:
@@ -104,17 +271,27 @@ const RESP = {
     data: [
       {
         id: 1,
-        username: "Crystal",
-        createdAt: "YYYY-MM-DD hh:mm",
-        modifiedAt: "YYYY-MM-DD hh:mm",
+        member: {
+          username: "Crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
+        createdAt: "YYYY-MM-DD",
+        modifiedAt: "YYYY-MM-DD",
         contents: "댓글리스트1",
         isMine: true,
         imageUrl:
           "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        isLike: true,
+        isFollow: false,
       },
       {
         id: 2,
-        username: "Crystal",
+        member: {
+          username: "Crystal",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
         createdAt: "YYYY-MM-DD hh:mm",
         modifiedAt: "YYYY-MM-DD hh:mm",
         contents: "댓글리스트2",
@@ -124,7 +301,11 @@ const RESP = {
       },
       {
         id: 3,
-        username: "park",
+        member: {
+          username: "park",
+          userImg:
+            "http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg",
+        },
         createdAt: "YYYY-MM-DD hh:mm",
         modifiedAt: "YYYY-MM-DD hh:mm",
         contents: "댓글리스트3",
@@ -212,6 +393,17 @@ const RESP = {
     message: null,
   },
   GET_USER_PROFILE_FAIL: { result: true, data: null, message: null },
+
+  LIKE_SUCCESS: {
+    result: true,
+    data: true,
+    message: "게시글 좋아요 성공",
+  },
+  UNLIKE_SUCCESS: {
+    result: true,
+    data: false,
+    message: "게시글 좋아요 취소",
+  },
 };
 
 export default RESP;

@@ -17,13 +17,13 @@ export const __getCommentsList = createAsyncThunk(
   "GET_COMMENTS_LIST",
   async (arg, thunkAPI) => {
     try {
-      //   const { data } = await axios({
-      //     method: "get",
-      //     url: `${URI.BASE}/api/comment/${arg.postId}?page=${arg.pageNum}&pageSize=${arg.pageSize}`,
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   });
+      // const { data } = await axios({
+      //   method: "get",
+      //   url: `${URI.BASE}/api/comment/${arg.postId}?page=${arg.pageNum}&pageSize=${arg.pageSize}`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // });
       const { data } = RES.GET_COMMENT_LIST_SUCCESS;
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
