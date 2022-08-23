@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import comment from "./modules/commentSlice";
 import post from "./modules/postSlice";
 import user from "./modules/userSlice";
+import follow from "./modules/followSlice";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 const middlewares = [thunk];
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   comment,
   user,
   post,
+  follow,
   devTools: false,
 });
 
