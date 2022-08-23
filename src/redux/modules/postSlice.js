@@ -5,6 +5,8 @@ import RES from "../../server/response";
 const initialState = {
   list: [],
   singlePost: {},
+  hasMoreTwits: null,
+  isLoading: null,
   //   isLoading: false,
   //   err: null,
 };
@@ -125,6 +127,7 @@ export const postSlice = createSlice({
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.list = action.payload;
+      state.hasMoreTwits = action.payload.length === 5;
     },
     [__getPost.rejected]: (state, action) => {
       state.isLoading = false;

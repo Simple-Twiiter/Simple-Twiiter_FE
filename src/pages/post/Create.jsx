@@ -27,6 +27,11 @@ function Create() {
   const [imagePreview, setImagePreview] = useState("");
   const imageUrl = watch("imageUrl");
 
+  const handleClick = (e) => {
+    let myInput = document.getElementById("fileInput");
+    myInput.click();
+  };
+
   const onSubmitHandler = (formData) => {
     const fd = new FormData();
     fd.append("data", formData);
@@ -55,7 +60,6 @@ function Create() {
         <Input
           type="text"
           name="contents"
-          placeholder="내용"
           required
           {...register("contents")}
           placeholder="오늘은 어떤 일이 일어나고 있나요?"
@@ -66,7 +70,9 @@ function Create() {
           placeholder="이미지 파일"
           type="file"
           {...register("imageUrl")}
+          style={{ display: "none" }}
         />
+        <button onClick={handleClick}>upload a file</button>
         <ImagePreview src={imagePreview} />
         <button type="submit">Tweet</button>
       </Form>
@@ -78,7 +84,6 @@ export default Create;
 
 const StCreateBox = styled.div`
   width: 100%;
-  height: 130px;
   /* border-radius: 10px; */
   border: 1px solid #eee;
   margin: auto;
@@ -119,7 +124,6 @@ const Input = styled.input`
   }
 `;
 
-
 const Form = styled.form`
   width: 100%;
   padding: 30px;
@@ -129,44 +133,15 @@ const Form = styled.form`
   align-items: center;
 `;
 
-const Input = styled.input`
-  box-sizing: border-box;
-  margin: 5px;
-  padding: 0;
-  font-variant: tabular-nums;
-  list-style: none;
-  font-feature-settings: "tnum", "tnum";
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  min-width: 0;
-  padding: 4px 11px;
-  color: rgba(0, 0, 0, 0.85);
-  font-size: 14px;
-  line-height: 1.5715;
-  background-color: #fff;
-  background-image: none;
-  border: 1px solid #d9d9d9;
-  border-radius: 2px;
-  transition: all 0.3s;
-  &:hover {
-    border-color: #40a9ff;
-    border-right-width: 1px;
-  }
-  &:focus {
-    outline: none;
-  }
-`;
-
 const StButton = styled.button`
-  width : 70px;
-  height : 30px ;
-  background: #00ACEE;
-	border-radius: 20px;
-	color: #fff;
-	border-width: 0.5px;
-	border-style: solid;
-	border-color: #0075a2;
+  width: 70px;
+  height: 30px;
+  background: #00acee;
+  border-radius: 20px;
+  color: #fff;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: #0075a2;
   &:hover {
     border-color: #40a9ff;
     border-right-width: 1px;
@@ -180,17 +155,6 @@ const TwitBox = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5px;
-`;
-
-`
-
-const TwitBox = styled.div`
-  display:flex;
-  margin-top : 5px;
-
-`
-const Icon = styled(FontAwesomeIcon)`
-  color: #5d5fef;
 `;
 
 const ImagePreview = styled.img`

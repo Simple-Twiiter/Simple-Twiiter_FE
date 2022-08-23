@@ -7,8 +7,37 @@ import { __getPost } from "../../redux/modules/postSlice";
 function TwitList() {
   const dispatch = useDispatch();
   const twits = useSelector((state) => state.post.list);
-  const [page, setPage] = useState(0);
+  const hasMoreTwits = useSelector((state) => state.post.hasMoreTwits);
+  const loadTwitsLoading = useSelector((state) => state.post.isLoading);
+  const [page, setPage] = useState(1);
   const pageSize = 5;
+
+  useEffect(() => {
+    function onScroll() {
+      console.log(
+        window.scrollY,
+        document.documentElement.clientHeight,
+        document.documentElement.scrollHeight
+      );
+      // window.scrollY : 얼마나 내렸는지
+      // document.documentElement.clientHeight : 화면에 보이는 길이
+      // document.documentElement.scrollHeight : 총길이
+      if (hasMoreTwits && !loadTwitsLoading) {
+        if (
+          window.scrollY + document.documentElement.clientHeight >
+          document.documentElement.scrollHeight - 300
+        ) {
+          dispatch(__getPost({ page: page, pageSize: pageSize }));
+          setPage((prev) => prev + 1);
+        }
+      }
+    }
+    window.addEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [hasMoreTwits, loadTwitsLoading, twits, dispatch]);
+
   useEffect(() => {
     dispatch(__getPost({ page: page, pageSize: pageSize }));
   }, [dispatch]);

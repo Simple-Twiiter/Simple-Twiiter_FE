@@ -13,7 +13,6 @@ function UserProfile() {
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const userInfoCount = useSelector((state) => state.user.userInfoCount);
-  console.log(username);
   // 로그아웃
   const onLogoutHandler = () => {
     // axios 통신후 result가 true일 때
