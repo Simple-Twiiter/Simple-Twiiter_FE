@@ -46,6 +46,11 @@ function SignUpForm() {
     navigate("/");
   };
 
+  const handleClick = (e) => {
+    let myInput = document.getElementById("fileInput");
+    myInput.click();
+  };
+
   const [imagePreview, setImagePreview] = useState("");
   const imageUrl = watch("imageUrl");
 
@@ -165,9 +170,14 @@ function SignUpForm() {
               placeholder="이미지 파일"
               type="file"
               {...register("imageUrl")}
+              style={{ display: "none" }}
             />
           </InputWrapper>
-          <ImagePreview src={imagePreview} />
+
+          <ImageWrapper>
+            <Button content={"프로필 이미지"} onClick={handleClick}></Button>
+            <ImagePreview src={imagePreview} />
+          </ImageWrapper>
           <MsgWrapper>
             <Msg>
               {errors.imageUrl && (
@@ -299,6 +309,26 @@ const ImagePreview = styled.img`
 
 const ButtonWrapper = styled.div`
   margin: auto;
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const UserImgBox = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+`;
+
+const UserImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 export default SignUpForm;
