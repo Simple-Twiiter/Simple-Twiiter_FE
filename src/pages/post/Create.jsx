@@ -12,6 +12,8 @@ function Create() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+//  console.log("1")
+
   const {
     register,
     handleSubmit,
