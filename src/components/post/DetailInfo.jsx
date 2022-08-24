@@ -98,11 +98,12 @@ function DetailInfo() {
                 </button>
               </StUpdateBox>
             )}
-
-           <UserImgBox>
+            <StUserBox>
+              <UserImgBox>
               <UserImage src={twitDetail.member?.userImg}></UserImage>
             </UserImgBox>
             <div>{twitDetail.member?.username}</div>
+            </StUserBox>
             <div>{twitDetail.title}</div>
             <div>{twitDetail.content}</div>
             <Img src={twitDetail.imgUrl}></Img>
@@ -278,4 +279,12 @@ const StControlButtons = styled.div`
   }
   }
 
+`
+const StUserBox = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
 `

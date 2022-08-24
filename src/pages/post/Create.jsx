@@ -50,21 +50,21 @@ function Create() {
   return (
     <StCreateBox>
       <Form onSubmit={handleSubmit(onSubmitHandler)}>
-        <Input
+        <StInputBox
           type="text"
           name="title"
           placeholder="제목"
           required
           {...register("title")}
         />
-        <Input
+        <StInputBox
           type="text"
           name="contents"
           required
           {...register("contents")}
           placeholder="오늘은 어떤 일이 일어나고 있나요?"
         />
-        <Input
+        <StInputBox
           id="fileInput"
           accept="image/*"
           placeholder="이미지 파일"
@@ -72,9 +72,12 @@ function Create() {
           {...register("imageUrl")}
           style={{ display: "none" }}
         />
-        <button onClick={handleClick}>upload a file</button>
+        <TwitBox>
+          <TwitImageButton onClick={handleClick}>📸</TwitImageButton>
+          <StButton type="submit">Tweet</StButton>
+        </TwitBox>
+        
         <ImagePreview src={imagePreview} />
-        <button type="submit">Tweet</button>
       </Form>
     </StCreateBox>
   );
@@ -124,6 +127,23 @@ const Input = styled.input`
   }
 `;
 
+const StInputBox = styled.input`
+  width : 50%;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 1;
+  margin-bottom: 15px;
+  &:focus {
+    outline: none;
+    border-color: #40a9ff;
+  }
+  &:hover {
+    border-color: #40a9ff;
+  }
+`
+
+
 const Form = styled.form`
   width: 100%;
   padding: 30px;
@@ -150,12 +170,24 @@ const StButton = styled.button`
 `;
 
 const TwitBox = styled.div`
+  width: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-top: 5px;
 `;
+
+const TwitImageButton = styled.button`
+  width: 35px;
+  height: 35px;
+  border : none;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover{  
+    background-color: rgba(210, 210, 210, 0.5);
+  }
+`
 
 const ImagePreview = styled.img`
   display: flex;

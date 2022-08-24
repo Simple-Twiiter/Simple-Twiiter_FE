@@ -37,11 +37,16 @@ function Twit({ twit }) {
           </StTitleButton>
         )}
         </StTwitTitle>
-      
+
+        <StUserBox>
+
         <UserImgBox>
-          <UserImage src={twit.member.userImg}></UserImage>
+        <UserImage src={twit.member.userImg}></UserImage>
         </UserImgBox>
         <h3>{twit.member.username}</h3>
+
+        </StUserBox>
+        
         <div>{twit.title}</div>
         <div>{twit.content}</div>
         <Img src={twit.imgUrl} />
@@ -72,7 +77,7 @@ const TwitBox = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
-  align-items: flex-start;
+  align-items: center;
   border-collapse: collapse;
   
   cursor: pointer;
@@ -145,3 +150,12 @@ const StTitleButton = styled.button`
     color : black;
   }
 `;
+
+const StUserBox = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+`
