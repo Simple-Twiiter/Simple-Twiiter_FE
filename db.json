@@ -82,9 +82,10 @@
         "title": "게시글1",
         "content": "게시글 등록1",
         "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
-        "isMine": true,
+        "isMine": false,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 2,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -101,6 +102,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -117,6 +119,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 5,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -130,9 +133,10 @@
         "title": "게시글4",
         "content": "게시글 등록4",
         "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
-        "isMine": true,
+        "isMine": false,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -149,6 +153,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -165,6 +170,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -181,6 +187,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       },
@@ -197,6 +204,7 @@
         "isMine": true,
         "isLike": false,
         "isFollow": false,
+        "heartCount": 3,
         "createdAt": "YYYY-MM-DD",
         "modifiedAt": "YYYY-MM-DD"
       }

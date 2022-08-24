@@ -227,6 +227,7 @@ const RESP = {
       isMine: true,
       isLike: false,
       isFollow: false,
+      heartCount: 3,
       createdAt: "YYYY-MM-DD",
       modifiedAt: "YYYY-MM-DD",
     },
