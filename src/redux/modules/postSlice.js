@@ -21,18 +21,19 @@ const config = {
   RefreshToken: localStorage.getItem("refreshToken"),
 };
 
+// ${URI.BASE}/api/post?page=${arg.page}&pageSize=${arg.pageSize}
 export const __getPost = createAsyncThunk(
   "post/__getPost",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "get",
-      //   url: `${URI.BASE}/api/post?page=${arg.page}&pageSize=${arg.pageSize}`,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const { data } = RES.GET_POSTS_SUCCESS;
+      const { data } = await axios({
+        method: "get",
+        url: `${URI.BASE}/post?_page=${arg.page}&_limit=2`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // const { data } = RES.GET_POSTS_SUCCESS;
 
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
