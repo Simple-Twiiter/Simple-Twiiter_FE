@@ -32,11 +32,12 @@ function Create() {
     myInput.click();
   };
 
-  const onSubmitHandler = (formData) => {
+  const onSubmitHandler = (formData, e) => {
     const fd = new FormData();
     fd.append("data", formData);
     fd.append("imageUrl", imageUrl[0]);
     dispatch(__postPost(fd));
+    reset();
   };
 
   // 이미지 프리뷰
@@ -46,6 +47,10 @@ function Create() {
       setImagePreview(URL.createObjectURL(file));
     }
   }, [imageUrl]);
+
+  useEffect(() => {
+    setFocus("title");
+  }, [setFocus]);
 
   return (
     <StCreateBox>
