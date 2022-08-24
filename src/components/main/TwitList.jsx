@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 function TwitList() {
   const dispatch = useDispatch();
   const twits = useSelector((state) => state.post.list);
-  const twits_fake = twits.data;
+  const twits_fake = twits;
   const [ref, inView] = useInView();
   // const hasMoreTwits = useSelector((state) => state.post.hasMoreTwits);
   // const loadTwitsLoading = useSelector((state) => state.post.isLoading);
@@ -27,7 +27,7 @@ function TwitList() {
   //       ) {
   //         dispatch(__getPost({ page: page, pageSize: pageSize }));
   //         setPage((prev) => prev + 1);
-  //         console.log(page);
+  //
   //       }
   //     }
   //   }
@@ -41,12 +41,11 @@ function TwitList() {
   //   dispatch(__getPost({ page: page, pageSize: pageSize }));
   // }, [dispatch]);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const pageSize = 5;
 
   useEffect(() => {
     if (twits_fake?.length === 0) {
-      console.log("첫 포스트 로딩");
       dispatch(__getPost({ page: page, pageSize: pageSize }));
       setPage((prev) => prev + 1);
       return;
@@ -55,7 +54,6 @@ function TwitList() {
 
   useEffect(() => {
     if (twits_fake?.length !== 0 && inView) {
-      console.log("첫 로딩 이후 무한 스크롤");
       dispatch(__getPost({ page: page, pageSize: pageSize }));
       setPage((prev) => prev + 1);
     }

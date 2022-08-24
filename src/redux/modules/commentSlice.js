@@ -8,8 +8,8 @@ const URI = {
 };
 
 const config = {
-  Authorization: localStorage.getItem("accessToken"),
-  RefreshToken: localStorage.getItem("refreshToken"),
+  Authorization: localStorage.getItem("Authorization"),
+  RefreshToken: localStorage.getItem("RefreshToken"),
 };
 
 // 댓글 리스트 가져오기
@@ -17,15 +17,15 @@ export const __getCommentsList = createAsyncThunk(
   "GET_COMMENTS_LIST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "get",
-      //   url: `${URI.BASE}/api/comment/${arg.postId}?page=${arg.pageNum}&pageSize=${arg.pageSize}`,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const { data } = RES.GET_COMMENT_LIST_SUCCESS;
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axios({
+        method: "get",
+        url: `${URI.BASE}/api/comment/${arg.id}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // const { data } = RES.GET_COMMENT_LIST_SUCCESS;
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -37,17 +37,18 @@ export const __getCommentsList = createAsyncThunk(
 export const __addComment = createAsyncThunk(
   "ADD_COMMENT",
   async (arg, thunkAPI) => {
+    console.log(arg);
     try {
-      // 실제 서버랑 연결할 때 꼭 data로 변경
-      const { datas } = await axios({
+      const { data } = await axios({
         method: "post",
-        url: `${URI.BASE}/commentList`,
+        url: `${URI.BASE}/api/comment/${arg.postId}`,
         data: {
-          contents: arg.comment,
+          content: arg.comment,
         },
         headers: config,
       });
-      const { data } = RES.ADD_COMMENT_SUCCESS;
+      console.log(data);
+      // const { data } = RES.ADD_COMMENT_SUCCESS;
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -60,17 +61,20 @@ export const __addComment = createAsyncThunk(
 export const __updateComment = createAsyncThunk(
   "UPDATE_COMMENT",
   async (arg, thunkAPI) => {
+    console.log(arg);
     try {
-      //   const { data } = axios({
-      //     method: "put",
-      //     url: `${URI.BASE}/api/comment/${arg.commentId}`,
-      //     data: {
-      //       contents: arg.comment,
-      //     },
-      //     headers: config,
-      //   });
-      const { data } = RES.UPDATE_COMMENT_SUCCESS2;
-      return thunkAPI.fulfillWithValue(data);
+      // /api/comment/{commentId}/{postId}
+      const res = axios({
+        method: "put",
+        url: `${URI.BASE}/api/comment/${arg.commentId}/${arg.postId}`,
+        data: {
+          content: arg.comment,
+        },
+        headers: config,
+      });
+      console.log(res);
+      // const { data } = RES.UPDATE_COMMENT_SUCCESS2;
+      return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -83,11 +87,11 @@ export const __deleteComment = createAsyncThunk(
   "DELETE_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      //   await axios({
-      //     method: "delete",
-      //     url: `${URI.BASE}/api/comment/${arg}`,
-      //     headers: config,
-      //   });
+      await axios({
+        method: "delete",
+        url: `${URI.BASE}/api/comment/${arg}`,
+        headers: config,
+      });
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);

@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
 const store = configureStore({
   reducer: rootReducer,
 
-  middleware: [...middlewares, logger],
+  middleware: [...middlewares],
 });
 
 export default store;

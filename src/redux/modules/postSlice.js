@@ -17,8 +17,8 @@ const URI = {
 };
 
 const config = {
-  Authorization: localStorage.getItem("accessToken"),
-  RefreshToken: localStorage.getItem("refreshToken"),
+  Authorization: localStorage.getItem("Authorization"),
+  RefreshToken: localStorage.getItem("RefreshToken"),
 };
 
 // ${URI.BASE}/api/post?page=${arg.page}&pageSize=${arg.pageSize}
@@ -28,14 +28,16 @@ export const __getPost = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URI.BASE}/post?_page=${arg.page}&_limit=2`,
+        url: `${URI.BASE}/api/post?page=0&pageSize=100`,
         headers: {
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
           "Content-Type": "application/json",
         },
       });
+      console.log(data);
       // const { data } = RES.GET_POSTS_SUCCESS;
-
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -46,15 +48,18 @@ export const __getSinglePost = createAsyncThunk(
   "post/__getSinglePost",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "get",
-      //   url: `${URI.BASE}/api/post/${arg.postId}`,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const { data } = RES.GET_POST_SUCCESS;
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axios({
+        method: "get",
+        url: `${URI.BASE}/api/post/${arg.postId}`,
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(data);
+      // const { data } = RES.GET_POST_SUCCESS;
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -65,14 +70,18 @@ export const __postPost = createAsyncThunk(
   "post/__postPost",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "post",
-      //   url: `${URI.BASE}/api/post`,
-      //   data: arg.fd,
-      //   headers: config,
-      // });
-      const { data } = RES.ADD_POST_SUCCESS;
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axios({
+        method: "post",
+        url: `${URI.BASE}/api/post`,
+        data: arg,
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+        },
+      });
+      // const { data } = RES.ADD_POST_SUCCESS;
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
@@ -83,12 +92,12 @@ export const __deletePost = createAsyncThunk(
   "post/__deletePost",
   async (arg, thunkAPI) => {
     try {
-      //   await axios({
-      //     method: "delete",
-      //     url: `${URI.BASE}/api/post/${arg}`,
-      //     headers: config,
-      //   });
-      const { data } = RES.DELETE_POST_SUCCESS;
+      await axios({
+        method: "delete",
+        url: `${URI.BASE}/api/post/${arg}`,
+        headers: config,
+      });
+      // const { data } = RES.DELETE_POST_SUCCESS;
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -100,16 +109,14 @@ export const __updatePost = createAsyncThunk(
   "post/__updatePost",
   async (arg, thunkAPI) => {
     try {
-      //   const { data } = axios({
-      //     method: "put",
-      //     url: `${URI.BASE}/api/post/${arg.id}`,
-      //     data: {
-      //       contents: arg.data,
-      //     },
-      //     headers: config,
-      //   });
-      const { data } = RES.UPDATE_POST_SUCCESS;
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = axios({
+        method: "put",
+        url: `${URI.BASE}/api/post/${arg.id}`,
+        data: arg.data,
+        headers: config,
+      });
+      // const { data } = RES.UPDATE_POST_SUCCESS;
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
@@ -140,7 +147,7 @@ export const postSlice = createSlice({
       state.isLoading = true;
     },
     [__postPost.fulfilled]: (state, action) => {
-      state.list = [...state.list, action.payload];
+      state.list.push(action.payload);
     },
     [__postPost.rejected]: (state, action) => {
       state.isLoading = false;

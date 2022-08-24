@@ -21,7 +21,7 @@ function AddForm() {
 
   const onSubmitHandler = (formData, e) => {
     e.preventDefault();
-    dispatch(__addComment({ comment: formData.comment }));
+    dispatch(__addComment({ postId: id, comment: formData.comment }));
     reset();
   };
 

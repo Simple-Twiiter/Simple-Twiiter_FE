@@ -15,7 +15,9 @@ function CommentList() {
   const [pageNum, setPageNum] = useState(0);
 
   useEffect(() => {
-    dispatch(__getCommentsList({ postId, pageSize, pageNum }));
+    dispatch(
+      __getCommentsList({ id: id, pageSize: pageSize, pageNum: pageNum })
+    );
   }, []);
 
   return (
