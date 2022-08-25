@@ -12,6 +12,7 @@ import {
 import { useParams } from "react-router-dom";
 
 function Comment({ comment, post }) {
+  console.log(comment);
   const { id } = useParams();
   const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ function Comment({ comment, post }) {
           <CommentUserProfile>
             {/* <User icon={faUser} /> */}
             <ImgBox>
-              <Image class="profile" src={comment.member.userImg} />
+              <Image className="profile" src={comment.member?.userImg} />
             </ImgBox>
             <Writer> {comment.member.username}</Writer>
           </CommentUserProfile>

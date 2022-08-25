@@ -80,24 +80,24 @@ function DetailInfo() {
             <Stkim>
               <StkimProp onClick={openbox}>...</StkimProp>
             </Stkim>
-            {/* {isLogin && isMine && isShow && ( */}
-            <StUpdateBox>
-              <button onClick={onEditHandler}>수정</button>
-              <button
-                onClick={(event) => {
-                  event.stopPropagation();
-                  const result = window.confirm("게시글을 삭제할래?");
-                  if (result) {
-                    return deleteHandler(param);
-                  } else {
-                    return;
-                  }
-                }}
-              >
-                삭제
-              </button>
-            </StUpdateBox>
-            {/* )} */}
+            {isLogin && isMine && isShow && (
+              <StUpdateBox>
+                <button onClick={onEditHandler}>수정</button>
+                <button
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const result = window.confirm("게시글을 삭제할래?");
+                    if (result) {
+                      return deleteHandler(param);
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  삭제
+                </button>
+              </StUpdateBox>
+            )}
             <StUserBox>
               <UserImgBox>
                 <UserImage src={twitDetail.member?.userImg}></UserImage>

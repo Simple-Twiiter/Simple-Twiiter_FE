@@ -19,7 +19,7 @@ function UserProfile() {
     BASE: process.env.REACT_APP_BASE_URI,
   };
 
-  // 로그아웃
+  // 로그아
   const onLogoutHandler = async () => {
     // axios 통신후 result가 true일 때
     // axios 통신후 결과가 true이면
@@ -45,6 +45,7 @@ function UserProfile() {
     dispatch(logout());
     localStorage.removeItem("Authorization");
     localStorage.removeItem("RefreshToken");
+    localStorage.removeItem("username");
     // alert(message);
     navigate("/");
   };

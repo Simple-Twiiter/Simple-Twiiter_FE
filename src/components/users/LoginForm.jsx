@@ -26,27 +26,23 @@ function LoginForm() {
   };
 
   //  antd 는 e.preventDefault() 자동으로 탑재되어있으므로 안써도 됨
-  const onSubmitHandler = useCallback(
-    async (e) => {
-      // axios 통신후 결과가 true이면
-      const { result, data, headers, message } = await axios({
-        method: "post",
-        url: `${URI.BASE}/api/user/login`,
-        data: user,
-      });
-      // const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
-      if (data.result) {
-        const { authorization, refreshtoken } = headers;
-        dispatch(login(data.data));
-        localStorage.setItem("Authorization", authorization);
-        localStorage.setItem("RefreshToken", refreshtoken);
-        localStorage.setItem("username", data.data.username);
-        navigate("/");
-      } else {
-      }
-    },
-    [user.username, user.password]
-  );
+  const onSubmitHandler = useCallback(async (e) => {
+    // axios 통신후 결과가 true이면
+    const { result, data, headers, message } = await axios({
+      method: "post",
+      url: `${URI.BASE}/api/user/login`,
+      data: user,
+    });
+    // const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
+    if (data.result) {
+      const { authorization, refreshtoken } = headers;
+      dispatch(login(data.data));
+      localStorage.setItem("Authorization", authorization);
+      localStorage.setItem("RefreshToken", refreshtoken);
+      localStorage.setItem("username", data.data.username);
+    } else {
+    }
+  }, []);
 
   return (
     // onFinish가 onSubmit임.
@@ -74,13 +70,14 @@ function LoginForm() {
         />
       </InputWrapper>
       <ButtonWrapper>
-        <Button htmlType="submit" content={"로그인"} />
         <Button
+          htmlType="submit"
+          content={"로그인"}
           onClick={() => {
-            navigate("/signup");
+            navigate("/");
           }}
-          content={"kakao Login"}
-        ></Button>
+        />
+        <Button content={"kakao Login"}></Button>
       </ButtonWrapper>
     </FormWrapper>
   );

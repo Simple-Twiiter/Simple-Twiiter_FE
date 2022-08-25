@@ -11,6 +11,7 @@ function CommentList() {
   const { id } = useParams();
   const postId = id;
   const commentList = useSelector((state) => state.comment.commentList);
+  console.log(commentList);
   const pageSize = 5;
   const [pageNum, setPageNum] = useState(0);
 
@@ -23,7 +24,7 @@ function CommentList() {
   return (
     <>
       <Container>
-        {commentList.map((comment) => {
+        {commentList?.map((comment) => {
           return (
             <Fragment key={comment.commentId}>
               <Comment comment={comment} postId={postId} />

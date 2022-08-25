@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"; // ♡
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"; // ♥︎import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
 
 const LikeBtn = ({ isLike, isLogin, postId, heart }) => {
   // ${URI.BASE}
@@ -22,37 +23,36 @@ const LikeBtn = ({ isLike, isLogin, postId, heart }) => {
     }
 
     if (!liked) {
-      // const { result, data, message } = await axios({
-      //     method: "post",
-      //     url: `${URI.BASE}/api/postLike/${postId}`,
-      //     headers: {
-      //         Authorization: localStorage.getItem("accessToken"),
-      //         RefreshToken: localStorage.getItem("refreshToken"),
-      //       },
-      //   });
-      const { result, data, message } = RESP.LIKE_SUCCESS;
+      const { result, data, message } = await axios({
+        method: "post",
+        url: `${URI.BASE}/api/postLike/${postId}`,
+        headers: {
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
+        },
+      });
+      // const { result, data, message } = RESP.LIKE_SUCCESS;
 
       // if (result) {
       //   alert(message);
       //   return;
       // }
-
-      setLiked(data);
+      setLiked((liked) => !liked);
       setHeartCount((prev) => prev + 1);
     } else {
-      // const { result, data, message } = await axios({
-      //     method: "post",
-      //     url: `${URI.BASE}/api/postLike/${postId}`,
-      //     headers: {
-      //         Authorization: localStorage.getItem("accessToken"),
-      //         RefreshToken: localStorage.getItem("refreshToken"),
-      //       },
-      //   });
+      const { result, data, message } = await axios({
+        method: "delete",
+        url: `${URI.BASE}/api/postLike/${postId}`,
+        headers: {
+          Authorization: localStorage.getItem("accessToken"),
+          RefreshToken: localStorage.getItem("refreshToken"),
+        },
+      });
 
       // success
-      const { result, data, message } = RESP.UNLIKE_SUCCESS;
+      // const { result, data, message } = RESP.UNLIKE_SUCCESS;
 
-      setLiked(data);
+      setLiked((liked) => !liked);
       setHeartCount((prev) => prev - 1);
     }
   };

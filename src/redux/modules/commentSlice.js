@@ -21,9 +21,12 @@ export const __getCommentsList = createAsyncThunk(
         method: "get",
         url: `${URI.BASE}/api/comment/${arg.id}`,
         headers: {
+          Authorization: localStorage.getItem("Authorization"),
+          RefreshToken: localStorage.getItem("RefreshToken"),
           "Content-Type": "application/json",
         },
       });
+      console.log(data);
       // const { data } = RES.GET_COMMENT_LIST_SUCCESS;
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
@@ -47,9 +50,8 @@ export const __addComment = createAsyncThunk(
         },
         headers: config,
       });
-      console.log(data);
       // const { data } = RES.ADD_COMMENT_SUCCESS;
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -61,10 +63,9 @@ export const __addComment = createAsyncThunk(
 export const __updateComment = createAsyncThunk(
   "UPDATE_COMMENT",
   async (arg, thunkAPI) => {
-    console.log(arg);
     try {
       // /api/comment/{commentId}/{postId}
-      const res = axios({
+      const { data } = await axios({
         method: "put",
         url: `${URI.BASE}/api/comment/${arg.commentId}/${arg.postId}`,
         data: {
@@ -72,9 +73,9 @@ export const __updateComment = createAsyncThunk(
         },
         headers: config,
       });
-      console.log(res);
+      console.log(data.data);
       // const { data } = RES.UPDATE_COMMENT_SUCCESS2;
-      return thunkAPI.fulfillWithValue(arg);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
