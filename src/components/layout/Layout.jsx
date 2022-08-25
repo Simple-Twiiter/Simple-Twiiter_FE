@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import UserProfile from "../users/UserProfile";
 import LoginForm from "../users/LoginForm";
 import { useSelector } from "react-redux";
+import RightSideBar from "../elements/RightSideBar";
 
 function Layout(props) {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -37,13 +38,7 @@ function Layout(props) {
           {props.children}
         </Col>
         <Col xs={24} md={6}>
-          <a
-            href="https://https://github.com/Simple-Twiiter/Simple-Twiiter_FE"
-            target="_blank"
-            REL="_noreferrer noopener"
-          >
-            FE 깃허브
-          </a>
+          <RightSideBar />
         </Col>
       </Row>
     </Layouts>

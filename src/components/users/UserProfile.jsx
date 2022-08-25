@@ -7,27 +7,46 @@ import { logout } from "../../redux/modules/userSlice";
 import RES from "../../server/response";
 import { useSelector } from "react-redux";
 import { __getSingleUser } from "../../redux/modules/userSlice";
+import axios from "axios";
 
 function UserProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
   const userInfoCount = useSelector((state) => state.user.userInfoCount);
-  // 로그아웃
-  const onLogoutHandler = () => {
+
+  const URI = {
+    BASE: process.env.REACT_APP_BASE_URI,
+  };
+
+  // 로그아
+  const onLogoutHandler = async () => {
     // axios 통신후 result가 true일 때
     // axios 통신후 결과가 true이면
-    // const { result, data, headers } = await axios.get(`http://3.39.229.105/api/logout`, {
-    //   headers: {
-    //     Authorization: localStorage.getItem("accessToken"),
-    //     RefreshToken: localStorage.getItem("refreshToken"),
-    //   },
-    // });
-    const { result, data, message } = RES.LOGOUT_SUCCESS;
+    // const { result, data, headers } = await axios.post(
+    //   `${URI.BASE}/api/logout`,
+    //   {
+    //     headers: {
+    //       Authorization: localStorage.getItem("Authorization"),
+    //       RefreshToken: localStorage.getItem("RefreshToken"),
+    //     },
+    //   }
+    // );
+
+    const { result, data, headers } = await axios({
+      method: "post",
+      url: `${URI.BASE}/api/logout`,
+      headers: {
+        Authorization: localStorage.getItem("Authorization"),
+        RefreshToken: localStorage.getItem("RefreshToken"),
+      },
+    });
+    // const { result, data, message } = RES.LOGOUT_SUCCESS;
     dispatch(logout());
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    alert(message);
+    localStorage.removeItem("Authorization");
+    localStorage.removeItem("RefreshToken");
+    localStorage.removeItem("username");
+    // alert(message);
     navigate("/");
   };
 

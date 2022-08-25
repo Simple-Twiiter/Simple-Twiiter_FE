@@ -20,7 +20,6 @@ function DetailInfo() {
   const [isShow, setIsShow] = useState(false);
 
   const openbox = () => {
-    console.log("눌림");
     setIsShow((prev) => !prev);
   };
 
@@ -53,13 +52,14 @@ function DetailInfo() {
 
   const onEditHandler = () => {
     if (isEdit) {
+      const fd = new FormData();
+      fd.append("title", newTwit.title);
+      fd.append("contents", newTwit.contents);
+      // fd.append("imgFile", null);
       dispatch(
         __updatePost({
           id: param,
-          data: {
-            title: newTwit.title,
-            contents: newTwit.contents,
-          },
+          data: fd,
         })
       );
     }
@@ -100,9 +100,9 @@ function DetailInfo() {
             )}
             <StUserBox>
               <UserImgBox>
-              <UserImage src={twitDetail.member?.userImg}></UserImage>
-            </UserImgBox>
-            <div>{twitDetail.member?.username}</div>
+                <UserImage src={twitDetail.member?.userImg}></UserImage>
+              </UserImgBox>
+              <div>{twitDetail.member?.username}</div>
             </StUserBox>
             <div>{twitDetail.title}</div>
             <div>{twitDetail.content}</div>
@@ -142,8 +142,6 @@ function DetailInfo() {
   );
 }
 
-export default DetailInfo;
-
 const StDetailInfo = styled.div`
   width: 100%;
   /* height: 500px; */
@@ -154,7 +152,6 @@ const StDetailInfo = styled.div`
   flex-direction: column;
   align-content: center;
   align-items: center;
-  
 `;
 
 const Input = styled.input`
@@ -215,22 +212,24 @@ const StUpdateBox = styled.div`
   display: flex;
   align-content: center;
   justify-content: flex-end;
-  align-items: center;      
-  button {
-  border: 1px solid #eee;
-  background-color: white;
-  border-radius: 10px;
-  display: flex;
-  align-content: center;
-  justify-content: flex-end;
   align-items: center;
-  cursor: pointer;
-  &:hover{  
+  button {
+    border: 1px solid #eee;
     background-color: white;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color : black;
+    border-radius: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: white;
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      color: black;
+    }
   }
-  }    
 `;
 
 const Img = styled.img`
@@ -262,24 +261,25 @@ const StControlButtons = styled.div`
   margin: auto;
   button {
     width: 100px;
-  height: 50px;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background-color : white;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-  &:hover{  
-    background-color: rgba(252, 237, 239, 0.3);
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    color : black;
+    height: 50px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    &:hover {
+      background-color: rgba(252, 237, 239, 0.3);
+      box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+        rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+        rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+      color: black;
+    }
   }
-  }
-
-`
+`;
 const StUserBox = styled.div`
   display: flex;
   width: 100%;
@@ -287,4 +287,6 @@ const StUserBox = styled.div`
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-`
+`;
+
+export default DetailInfo;

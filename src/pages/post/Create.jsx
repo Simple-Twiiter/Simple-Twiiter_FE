@@ -33,9 +33,11 @@ function Create() {
   };
 
   const onSubmitHandler = (formData, e) => {
+    const imageUrl = watch("imgUrl");
     const fd = new FormData();
-    fd.append("data", formData);
-    fd.append("imageUrl", imageUrl[0]);
+    fd.append("title", formData.title);
+    fd.append("contents", formData.contents);
+    fd.append("imgFile", formData.imageUrl[0]);
     dispatch(__postPost(fd));
     reset();
   };
@@ -75,20 +77,18 @@ function Create() {
           placeholder="이미지 파일"
           type="file"
           {...register("imageUrl")}
-          style={{ display: "none" }}
+          // style={{ display: "none" }}
         />
         <TwitBox>
-          <TwitImageButton onClick={handleClick}>📸</TwitImageButton>
+          {/* <TwitImageButton onClick={handleClick}>📸</TwitImageButton> */}
           <StButton type="submit">Tweet</StButton>
         </TwitBox>
-        
+
         <ImagePreview src={imagePreview} />
       </Form>
     </StCreateBox>
   );
 }
-
-export default Create;
 
 const StCreateBox = styled.div`
   width: 100%;
@@ -133,7 +133,7 @@ const Input = styled.input`
 `;
 
 const StInputBox = styled.input`
-  width : 50%;
+  width: 50%;
   border-left-width: 0;
   border-right-width: 0;
   border-top-width: 0;
@@ -146,8 +146,7 @@ const StInputBox = styled.input`
   &:hover {
     border-color: #40a9ff;
   }
-`
-
+`;
 
 const Form = styled.form`
   width: 100%;
@@ -186,13 +185,13 @@ const TwitBox = styled.div`
 const TwitImageButton = styled.button`
   width: 35px;
   height: 35px;
-  border : none;
+  border: none;
   border-radius: 50%;
   cursor: pointer;
-  &:hover{  
+  &:hover {
     background-color: rgba(210, 210, 210, 0.5);
   }
-`
+`;
 
 const ImagePreview = styled.img`
   display: flex;
@@ -203,3 +202,5 @@ const ImagePreview = styled.img`
 const ButtonWrapper = styled.div`
   margin: auto;
 `;
+
+export default Create;

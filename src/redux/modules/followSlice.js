@@ -17,14 +17,14 @@ export const __getfollowingList = createAsyncThunk(
   "GET_FOLLOW_LIST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "get",
-      //   url: `${URI.BASE}/api/follower/${arg.memberId}`,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const { data } = RES.GET_FOLLOWINGS_SUCCESS;
+      const { data } = await axios({
+        method: "get",
+        url: `${URI.BASE}/api/follower/${arg.memberId}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // const { data } = RES.GET_FOLLOWINGS_SUCCESS;
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -37,14 +37,14 @@ export const __getfollowerList = createAsyncThunk(
   "GET_FOLLOWER_LIST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axios({
-      //   method: "get",
-      //   url: `${URI.BASE}/api/following/${arg.memberId}`,
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      // });
-      const { data } = RES.GET_FOLLOWERS_SUCCESS;
+      const { data } = await axios({
+        method: "get",
+        url: `${URI.BASE}/api/following/${arg.memberId}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // const { data } = RES.GET_FOLLOWERS_SUCCESS;
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);

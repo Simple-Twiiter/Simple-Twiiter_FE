@@ -6,10 +6,9 @@ import Create from "./post/Create";
 import Login from "./user/Login";
 
 function Main() {
-  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <Layout>
-      {isLogin && <Create />}
+      <Create />
       <TwitList />
     </Layout>
   );

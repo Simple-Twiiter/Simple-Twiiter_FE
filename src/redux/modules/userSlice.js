@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import RES from "../../server/response";
+import axios from "axios";
 
 // ${URI.BASE}
 const URI = {
@@ -7,7 +8,7 @@ const URI = {
 };
 
 const initialState = {
-  isLogin: localStorage.getItem("accessToken") ? true : false,
+  isLogin: localStorage.getItem("Authorization") ? true : false,
   userInfoCount: {},
 };
 

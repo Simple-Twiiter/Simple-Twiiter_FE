@@ -13,7 +13,6 @@ function SignUpForm() {
   const URI = {
     BASE: process.env.REACT_APP_BASE_URI,
   };
-  console.log(URI.BASE);
 
   const {
     register,
@@ -28,21 +27,21 @@ function SignUpForm() {
   });
 
   const onSubmitHandler = async (formData) => {
-    console.log(formData);
-    const imageUrl = watch("imageUrl");
-
+    const imageUrl = watch("imgUrl");
     const fd = new FormData();
-    fd.append("account", formData.account);
     fd.append("password", formData.password);
-    fd.append("passwordCheck", formData.passwordCheck);
-    fd.append("imageUrl", imageUrl[0]);
-    // const { result, data, message } = await axios({
-    //   method: "post",
-    //   url: `http://${URI.BASE}/api/user/signup`,
-    //   data: fd,
-    // });
-    const { result, data, message } = RESP.SIGN_UP_SUCCESS;
-    alert(message);
+    fd.append("passwordConfirm", formData.passwordConfirm);
+    fd.append("username", formData.username);
+    fd.append("imgFile", imageUrl[0]);
+    const { result, data, message } = await axios({
+      method: "post",
+      url: `${URI.BASE}/api/user/signup`,
+      data: fd,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    // const { result, data, message } = RESP.SIGN_UP_SUCCESS;
     navigate("/");
   };
 
@@ -52,7 +51,7 @@ function SignUpForm() {
   };
 
   const [imagePreview, setImagePreview] = useState("");
-  const imageUrl = watch("imageUrl");
+  const imageUrl = watch("imgUrl");
 
   // 이미지 프리뷰
   useEffect(() => {
@@ -128,12 +127,12 @@ function SignUpForm() {
               )}
             </Msg>
           </MsgWrapper>
-          <Label htmlFor="passwordCheck">PW CHECK</Label>
+          <Label htmlFor="passwordConfirm">PW CHECK</Label>
           <InputWrapper>
             <Input
               type="password"
               placeholder="비밀번호"
-              {...register("passwordCheck", {
+              {...register("passwordConfirm", {
                 required: "비밀번호는 필수 입력사항입니다.",
                 validate: (value) => {
                   const result = passwordCheck(value);
@@ -162,20 +161,20 @@ function SignUpForm() {
             </Msg>
           </MsgWrapper>
 
-          <Label htmlFor="imageUrl">PROFILE IMG</Label>
+          <Label htmlFor="imgUrl">PROFILE IMG</Label>
           <InputWrapper>
             <Input
               id="fileInput"
               accept="image/*"
               placeholder="이미지 파일"
               type="file"
-              {...register("imageUrl")}
-              style={{ display: "none" }}
+              {...register("imgUrl")}
+              // style={{ display: "none" }}
             />
           </InputWrapper>
 
           <ImageWrapper>
-            <Button content={"프로필 이미지"} onClick={handleClick}></Button>
+            {/* <Button content={"프로필 이미지"} onClick={handleClick}></Button> */}
             <ImagePreview src={imagePreview} />
           </ImageWrapper>
           <MsgWrapper>

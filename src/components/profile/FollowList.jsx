@@ -5,7 +5,6 @@ import Button from "../elements/Button";
 import PropTypes from "prop-types";
 
 function FollowList({ header, data }) {
-  console.log(data);
   return (
     //dataSource : data, data 리스트
     <List

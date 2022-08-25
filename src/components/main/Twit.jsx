@@ -12,7 +12,6 @@ function Twit({ twit }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isMine = twit.isMine;
-
   const deleteHandler = () => {
     dispatch(__deletePost(twit.id));
   };
@@ -22,39 +21,43 @@ function Twit({ twit }) {
       <TwitBox onClick={() => navigate(`/detail/${twit.id}`)}>
         <StTwitTitle>
           {isLogin && isMine && (
-          <StTitleButton
-            onClick={(event) => {
-              event.stopPropagation();
-              const result = window.confirm("진짜로 삭제하시겠습니까?");
-              if (result) {
-                return deleteHandler(twit.id);
-              } else {
-                return;
-              }
-            }}
-          >
-            ✖
-          </StTitleButton>
-        )}
+            <StTitleButton
+              onClick={(event) => {
+                event.stopPropagation();
+                const result = window.confirm("진짜로 삭제하시겠습니까?");
+                if (result) {
+                  return deleteHandler(twit.id);
+                } else {
+                  return;
+                }
+              }}
+            >
+              ✖
+            </StTitleButton>
+          )}
         </StTwitTitle>
 
         <StUserBox>
-
-        <UserImgBox>
-        <UserImage src={twit.member.userImg}></UserImage>
-        </UserImgBox>
-        <h3>{twit.member.username}</h3>
-
+          <UserImgBox>
+            <UserImage src={twit.member.userImg}></UserImage>
+          </UserImgBox>
+          <h3>{twit.member.username}</h3>
         </StUserBox>
-        
+
         <div>{twit.title}</div>
         <div>{twit.content}</div>
         <Img src={twit.imgUrl} />
-        
+
         <h3>{twit.createdAt}</h3>
       </TwitBox>
       <ButtonsWrapper>
-        <LikeBtn isLogin={isLogin} postId={twit.id} isLike={twit.isLike} />
+        <LikeBtn
+          isLogin={isLogin}
+          postId={twit.id}
+          isLike={twit.isLike}
+          heart={twit.heartCount}
+        />
+
         {!isMine && (
           <FollowButton
             isLogin={isLogin}
@@ -67,8 +70,6 @@ function Twit({ twit }) {
   );
 }
 
-export default Twit;
-
 const TwitBox = styled.div`
   width: 100%;
   /* border-radius: 10px; */
@@ -79,11 +80,12 @@ const TwitBox = styled.div`
   align-content: center;
   align-items: center;
   border-collapse: collapse;
-  
+
   cursor: pointer;
-  &:hover{  
+  &:hover {
     background-color: rgba(210, 210, 210, 0.08);
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+      rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     color: black;
   }
 `;
@@ -116,23 +118,20 @@ const UserImage = styled.img`
   object-fit: cover;
 `;
 
-
-
 const StTwitTitle = styled.div`
-  display:flex;
+  display: flex;
   width: 100%;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   align-content: center;
-`
-
+`;
 
 const StTitleButton = styled.button`
   width: 35px;
   height: 35px;
   /* border: 1px solid #eee; */
-  border : none;
+  border: none;
   /* border: 0;
   outline: 0; */
   border-radius: 50%;
@@ -142,12 +141,12 @@ const StTitleButton = styled.button`
   align-items: center;
   /* margin-bottom: 5px; */
   cursor: pointer;
-  background-color : white;
+  background-color: white;
   /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
-  &:hover{  
+  &:hover {
     background-color: rgba(210, 210, 210, 0.5);
     /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
-    color : black;
+    color: black;
   }
 `;
 
@@ -158,4 +157,6 @@ const StUserBox = styled.div`
   align-content: center;
   justify-content: flex-start;
   align-items: center;
-`
+`;
+
+export default Twit;

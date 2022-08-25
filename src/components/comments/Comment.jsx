@@ -9,11 +9,15 @@ import {
   __deleteComment,
   __updateComment,
 } from "../../redux/modules/commentSlice";
+import { useParams } from "react-router-dom";
 
 function Comment({ comment, post }) {
+  console.log(comment);
+  const { id } = useParams();
   const isLogin = useSelector((state) => state.user.isLogin);
   const dispatch = useDispatch();
-  const isMine = comment.isMine;
+  // const isMine = comment.isMine;
+  const isMine = true;
 
   const {
     register,
@@ -33,7 +37,11 @@ function Comment({ comment, post }) {
 
   const onUpdateHandler = (formData) => {
     dispatch(
-      __updateComment({ commentId: commentId, comment: formData.comment })
+      __updateComment({
+        commentId: commentId,
+        comment: formData.comment,
+        postId: id,
+      })
     );
     setEdit(false);
   };
@@ -54,7 +62,7 @@ function Comment({ comment, post }) {
           <CommentUserProfile>
             {/* <User icon={faUser} /> */}
             <ImgBox>
-              <Image class="profile" src={comment.member.userImg} />
+              <Image className="profile" src={comment.member?.userImg} />
             </ImgBox>
             <Writer> {comment.member.username}</Writer>
           </CommentUserProfile>
@@ -97,7 +105,8 @@ function Comment({ comment, post }) {
           </>
         ) : (
           <>
-            <CommentContent>{comment.contents}</CommentContent>
+            <CommentContent>{comment.content}</CommentContent>
+            {comment.createdAt}
             <Hr noshade />
           </>
         )}
