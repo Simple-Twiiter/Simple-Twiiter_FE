@@ -13,6 +13,7 @@ function CommentList() {
   const commentList = useSelector((state) => state.comment.commentList);
   const pageSize = 5;
   const [pageNum, setPageNum] = useState(0);
+  console.log("여기찍힘??")
 
   useEffect(() => {
     dispatch(__getCommentsList({ postId, pageSize, pageNum }));

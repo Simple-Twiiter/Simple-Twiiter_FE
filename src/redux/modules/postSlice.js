@@ -28,7 +28,7 @@ export const __getPost = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URI.BASE}/post?_page=${arg.page}&_limit=2`,
+        url: `http://localhost:5002/post?_page=${arg.page}&_limit=2`,
         headers: {
           "Content-Type": "application/json",
         },

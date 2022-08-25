@@ -16,6 +16,7 @@ const config = {
 export const __getCommentsList = createAsyncThunk(
   "GET_COMMENTS_LIST",
   async (arg, thunkAPI) => {
+    console.log(arg)
     try {
       // const { data } = await axios({
       //   method: "get",

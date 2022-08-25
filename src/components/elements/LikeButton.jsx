@@ -76,8 +76,9 @@ const LikeBtn = ({ isLike, isLogin, postId }) => {
 };
 
 const HeartIcon = styled(FontAwesomeIcon)`
-  font-size: 18px;
+  font-size: 35px;
   color: ${(props) => props.theme.mainColor};
+  cursor: pointer;
 `;
 
 export default LikeBtn;

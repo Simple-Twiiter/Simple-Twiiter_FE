@@ -77,7 +77,6 @@ function SignUpForm() {
             <Input
               name="username"
               placeholder="아이디"
-              required
               {...register("username", {
                 required: "아이디는 필수 입력사항입니다.",
                 validate: (value) => {

@@ -31,8 +31,10 @@ function LoginForm() {
       // });
 
       const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
+      console.log(data)
       if (result) {
         const { authorization, refreshToken } = headers;
+        // console.log(data);
         dispatch(login(data));
         localStorage.setItem("accessToken", authorization);
         localStorage.setItem("refreshToken", refreshToken);

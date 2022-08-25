@@ -61,13 +61,11 @@ function Create() {
           type="text"
           name="title"
           placeholder="제목"
-          required
           {...register("title")}
         />
         <StInputBox
           type="text"
           name="contents"
-          required
           {...register("contents")}
           placeholder="오늘은 어떤 일이 일어나고 있나요?"
         />
@@ -166,13 +164,12 @@ const StButton = styled.button`
   background: #00acee;
   border-radius: 20px;
   color: #fff;
-  border-width: 0.5px;
-  border-style: solid;
-  border-color: #0075a2;
+  border: none;
+  cursor: pointer;
   &:hover {
     border-color: #40a9ff;
     border-right-width: 1px;
-    background-color: rgba(106, 150, 240, 1);
+    background-color: rgba(93, 95, 239, 1);
   }
 `;
 

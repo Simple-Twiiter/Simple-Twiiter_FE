@@ -8,6 +8,12 @@ import {
   __updatePost,
 } from "../../redux/modules/postSlice";
 
+
+
+
+
+
+
 function DetailInfo() {
   const isLogin = useSelector((state) => state.user.isLogin);
   const navigate = useNavigate();
@@ -141,6 +147,12 @@ function DetailInfo() {
     </div>
   );
 }
+
+
+
+
+
+
 
 export default DetailInfo;
 

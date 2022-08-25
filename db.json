@@ -98,7 +98,7 @@
         "title": "게시글2",
         "content": "게시글 등록2",
         "imgUrl": "https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E",
-        "isMine": true,
+        "isMine": false,
         "isLike": false,
         "isFollow": false,
         "createdAt": "YYYY-MM-DD",
