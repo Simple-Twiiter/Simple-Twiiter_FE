@@ -36,14 +36,14 @@ function LoginForm() {
     console.log(data)
     // const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
     if (data.result) {
-      alert("로그인 성공")
+      alert("로그인 되었습니다.")
       const { authorization, refreshtoken } = headers;
       dispatch(login(data.data));
       localStorage.setItem("Authorization", authorization);
       localStorage.setItem("RefreshToken", refreshtoken);
       localStorage.setItem("username", data.data.username);
     } else {
-      alert("로그인 실패")
+      alert("일치하지 않은 사용자 입니다.")
     }
   };
 
@@ -77,7 +77,7 @@ function LoginForm() {
           htmlType="submit"
           content={"로그인"}
           onClick={() => {
-            navigate("/");
+            // navigate("/");
           }}
         />
         <Button content={"kakao Login"}></Button>

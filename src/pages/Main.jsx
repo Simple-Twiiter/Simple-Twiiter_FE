@@ -5,13 +5,17 @@ import TwitList from "../components/main/TwitList";
 import Create from "./post/Create";
 import Login from "./user/Login";
 
+
 function Main() {
+  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <Layout>
-      <Create />
+      {isLogin && <Create />}
       <TwitList />
     </Layout>
   );
 }
 
 export default Main;
+
+

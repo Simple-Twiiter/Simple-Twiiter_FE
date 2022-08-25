@@ -1,0 +1,84 @@
+.stUserBox {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.userImgBox {
+  width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.userImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.twitImg {
+  width: 60%;
+  margin: 20px 10px;
+}
+
+.twitBox {
+  width: 70%;
+  /* border-radius: 10px; */
+  border: 1px solid #eee;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  border-collapse: collapse;
+  cursor: pointer;
+}
+.twitBox:hover {
+  background-color: rgba(210, 210, 210, 0.08);
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  color: black;
+}
+
+.stTwitTitle {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-content: center;
+}
+
+.stTitleButton {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: white;
+}
+
+.stTitleButton:hover {
+  background-color: rgba(210, 210, 210, 0.5);
+  color: black;
+}
+
+
+.buttonsWrapper {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  margin-bottom: 30px;
+  padding: 10px;  
+  justify-content: center;
+}
+  

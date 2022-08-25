@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import "./RightSideBar.css"
 
 function RightSideBar() {
   return (
     <div>
-      <StGitBox>
-        <StGitBoxTitle>Github Address</StGitBoxTitle>
+      <div className="stGitBoxs">
+        <div className="stGitBoxTitle">Github Address</div>
         <div>💜 Simple-Twiiter_FE</div>
         <StFEBox>
           <a
@@ -57,7 +58,7 @@ function RightSideBar() {
             Team Github Link
           </a>
         </StTeamGit>
-      </StGitBox>
+      </div>
     </div>
   );
 }

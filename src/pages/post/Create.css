@@ -1,0 +1,67 @@
+.stCreateBox {
+  width: 100%;
+  border: 1px solid #eee;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  border-collapse: collapse;
+}
+
+.createForm {
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.stInputBox {
+  width: 50%;
+  border-left-width: 0;
+  border-right-width: 0;
+  border-top-width: 0;
+  border-bottom-width: 1;
+  margin-bottom: 15px;
+}
+.stInputBox:focus {
+  outline: none;
+  border-color: #40a9ff;
+}
+.stInputBox:hover {
+  border-color: #40a9ff;
+}
+
+.twitbigBox {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.imagePreview {
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.stTweetButton {
+  width: 70px;
+  height: 30px;
+  background: #00acee;
+  border-radius: 20px;
+  color: #fff;
+  border-width: 0.5px;
+  border-style: solid;
+  border-color: #0075a2;  
+}
+.stTweetButton:hover {
+    border-color: #40a9ff;
+    border-right-width: 1px;
+    background-color: rgba(106, 150, 240, 1);
+  }

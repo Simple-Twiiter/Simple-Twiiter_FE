@@ -1,0 +1,93 @@
+.stCommentView {
+    width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stCommentHeader {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;  
+}
+
+.stCommentUserProfile {
+   display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px; 
+}
+
+.stCommentImgBox {
+   width: 50px;
+  height: 50px;
+  border-radius: 70%;
+  overflow: hidden; 
+}
+
+.stCommentImage {
+   width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+.stWriter {
+  font-size: 15px;
+  color: #a0a0a0;  
+}
+
+.stButtonWrapper {
+   display: flex;
+  flex-direction: row; 
+}
+
+
+.stCommentButton {
+   font-size: 13px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #5D5FEF
+}
+  
+
+.stCommentContent {
+   display: flex;
+  margin: 20px 0px 40px 0px;
+  height: 20%; 
+}
+
+
+.stTextarea {
+    width: 100%;
+  height: 60px;
+  border: 0;
+  resize: none;
+  background-color: transparent;
+  font-size: small;
+  padding: 10px;
+  border-bottom: #d9d8d8 1px solid;
+
+}
+  
+  .stTextarea:focus {
+    outline: none;
+  }
+
+
+.stButtonBox {
+   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-right: -20px; 
+}
+
+
+ 

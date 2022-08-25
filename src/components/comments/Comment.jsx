@@ -10,6 +10,7 @@ import {
   __updateComment,
 } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
+import "./Comment.css"
 
 function Comment({ comment, post }) {
   console.log(comment);
@@ -55,37 +56,38 @@ function Comment({ comment, post }) {
     }
   };
 
+  const username2 = localStorage.getItem("username")
   return (
     <>
-      <CommentView>
-        <CommentHeader>
-          <CommentUserProfile>
+      <div className="stCommentView">
+        <div className="stCommentHeader">
+          <div className="stCommentUserProfile">
             {/* <User icon={faUser} /> */}
-            <ImgBox>
-              <Image className="profile" src={comment.member?.userImg} />
-            </ImgBox>
-            <Writer> {comment.member.username}</Writer>
-          </CommentUserProfile>
-          <ButtonWrapper>
-            {isLogin && isMine && !isEdit && (
-              <CommentButton onClick={isEditHandler}>수정</CommentButton>
+            <div className="stCommentImgBox">
+              <img className="stCommentImage" src={comment.member?.userImg} />
+            </div>
+            <div className="stWriter"> {comment.member.username}</div>
+          </div>
+          <div className="stButtonWrapper">
+            {isLogin && (comment?.member?.username === username2) &&  !isEdit && (
+              <button className="stCommentButton" onClick={isEditHandler}>수정</button>
             )}
-            {isLogin && isMine && (
-              <CommentButton
+            {isLogin && (comment?.member?.username === username2) && (
+              <button className="stCommentButton"
                 onClick={() => {
                   onDeleteHandler();
                 }}
               >
                 삭제
-              </CommentButton>
+              </button>
             )}
-          </ButtonWrapper>
-        </CommentHeader>
+          </div>
+        </div>
         {isEdit ? (
           <>
             <Form onSubmit={handleSubmit(onUpdateHandler)}>
-              <CommentContent>
-                <Textarea
+              <div className="stCommentContent">
+                <input className="stTextarea"
                   required
                   type="text"
                   placeholder={"댓글을 입력해주세요. (5-100자)"}
@@ -94,23 +96,23 @@ function Comment({ comment, post }) {
                   {...register("comment", {
                     required: "댓글은 필수 입력사항입니다.",
                   })}
-                />
-              </CommentContent>
-              <ButtonBox>
-                <Button content={"취소"} onClick={isEditHandler} />
-                <Button type="submit" content={"댓글 수정"} />
-              </ButtonBox>
+                ></input>
+              </div>
+              <div className="stButtonBox">
+                <button className="stCommentButton" onClick={isEditHandler} >취소</button>
+                <button className="stCommentButton" type="submit">댓글 수정</button>
+              </div>
             </Form>
-            <Hr noshade />
+            <hr noshade />
           </>
         ) : (
           <>
-            <CommentContent>{comment.content}</CommentContent>
+            <div className="stCommentContent">{comment.content}</div>
             {comment.createdAt}
-            <Hr noshade />
+            <hr noshade />
           </>
         )}
-      </CommentView>
+      </div>
     </>
   );
 }

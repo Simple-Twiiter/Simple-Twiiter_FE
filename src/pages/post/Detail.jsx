@@ -6,13 +6,12 @@ import DetailInfo from "../../components/post/DetailInfo";
 import { useSelector } from "react-redux";
 
 function Detail() {
-  // const isLogin = useSelector((state) => state.user.isLogin);
+  const isLogin = useSelector((state) => state.user.isLogin);
   return (
     <div>
       <Layout>
         <DetailInfo />
-        <AddForm />
-        {/* {isLogin && <AddForm />} */}
+        {isLogin && <AddForm />}
         <CommentList />
       </Layout>
     </div>

@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { __deletePost } from "../../redux/modules/postSlice";
 import FollowButton from "../elements/FollowButton";
 import LikeBtn from "../elements/LikeButton";
+import "./Twit.css"
 
 function Twit({ twit }) {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -18,10 +19,10 @@ function Twit({ twit }) {
 
   return (
     <>
-      <TwitBox onClick={() => navigate(`/detail/${twit.id}`)}>
-        <StTwitTitle>
+      <div className="twitBox" onClick={() => navigate(`/detail/${twit.id}`)}>
+        <div className="stTwitTitle">
           {isLogin && isMine && (
-            <StTitleButton
+            <div className="stTitleButton"
               onClick={(event) => {
                 event.stopPropagation();
                 const result = window.confirm("진짜로 삭제하시겠습니까?");
@@ -33,24 +34,24 @@ function Twit({ twit }) {
               }}
             >
               ✖
-            </StTitleButton>
+            </div>
           )}
-        </StTwitTitle>
+        </div>
 
-        <StUserBox>
-          <UserImgBox>
-            <UserImage src={twit.member.userImg}></UserImage>
-          </UserImgBox>
+        <div className="stUserBox">
+          <div className="userImgBox">
+            <img className="userImage" src={twit.member.userImg}></img>
+          </div>
           <h3>{twit.member.username}</h3>
-        </StUserBox>
+        </div>
 
         <div>{twit.title}</div>
         <div>{twit.content}</div>
-        <Img src={twit.imgUrl} />
+        <img className="twitImg" src={twit.imgUrl} />
 
         <h3>{twit.createdAt}</h3>
-      </TwitBox>
-      <ButtonsWrapper>
+      </div>
+      <div className="buttonsWrapper">
         <LikeBtn
           isLogin={isLogin}
           postId={twit.id}
@@ -58,14 +59,14 @@ function Twit({ twit }) {
           heart={twit.heartCount}
         />
 
-        {!isMine && (
+        {/* {!isMine && (
           <FollowButton
             isLogin={isLogin}
             postId={twit.id}
             isFollow={twit.isFollow}
           />
-        )}
-      </ButtonsWrapper>
+        )} */}
+      </div>
     </>
   );
 }
@@ -100,7 +101,6 @@ const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* border: 1px solid #9e9999; */
   margin-bottom: 30px;
   padding: 10px;
 `;
@@ -130,22 +130,16 @@ const StTwitTitle = styled.div`
 const StTitleButton = styled.button`
   width: 35px;
   height: 35px;
-  /* border: 1px solid #eee; */
   border: none;
-  /* border: 0;
-  outline: 0; */
   border-radius: 50%;
   display: flex;
   align-content: center;
   justify-content: center;
   align-items: center;
-  /* margin-bottom: 5px; */
   cursor: pointer;
   background-color: white;
-  /* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
   &:hover {
     background-color: rgba(210, 210, 210, 0.5);
-    /* box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset; */
     color: black;
   }
 `;

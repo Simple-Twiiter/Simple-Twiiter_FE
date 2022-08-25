@@ -7,6 +7,7 @@ import {
   __deletePost,
   __updatePost,
 } from "../../redux/modules/postSlice";
+import "./DetailInfo.css"
 
 function DetailInfo() {
   const isLogin = useSelector((state) => state.user.isLogin);
@@ -15,7 +16,7 @@ function DetailInfo() {
   const params = useParams();
   const param = parseInt(params.id);
   const twitDetail = useSelector((state) => state.post.singlePost);
-  const isMine = twitDetail.isMine;
+  // const isMine = twitDetail.isMine;
 
   const [isShow, setIsShow] = useState(false);
 
@@ -79,10 +80,10 @@ function DetailInfo() {
       {isEdit === false ? (
         //false 일때
         <div>
-          <StDetailInfo>
-            <Stkim>
+          <div className="stDetailInfo">
+            <div className="stkim">
               <StkimProp onClick={openbox}>...</StkimProp>
-            </Stkim>
+            </div>
             {isLogin && (twitDetail?.member?.username === username2) && (
               <StUpdateBox>
                 <button onClick={onEditHandler}>수정</button>
@@ -101,31 +102,33 @@ function DetailInfo() {
                 </button>
               </StUpdateBox>
              )} 
-            <StUserBox>
-              <UserImgBox>
-                <UserImage src={twitDetail.member?.userImg}></UserImage>
-              </UserImgBox>
+
+            <div className="stUserBox">
+              <div className="stUserImgBox">
+                <img className="stUserImage" src={twitDetail.member?.userImg}></img>
+              </div>
               <div>{twitDetail.member?.username}</div>
-            </StUserBox>
+            </div>
+
             <div>{twitDetail.title}</div>
             <div>{twitDetail.contents}</div>
-            <Img src={twitDetail.imgUrl}></Img>
+            <img className="stImg" src={twitDetail.imgUrl}></img>
             <div>{twitDetail.createdAt}</div>
-          </StDetailInfo>
+          </div>
         </div>
       ) : (
         //true 일때
         <div>
-          <StDetailInfo>
+          <div className="stDetailInfo">
             <div>
-              <Input
+              <input className="updateInput"
                 type="text"
                 name="title"
                 value={newTwit.title}
                 onChange={onChangeHandler}
                 placeholder="여기다가는 제목"
               />
-              <Input
+              <input className="updateInput"
                 type="text"
                 name="contents"
                 value={newTwit.contents}
@@ -134,11 +137,11 @@ function DetailInfo() {
               />
             </div>
 
-            <StControlButtons>
+            <div className="stControlButtons">
               <button onClick={onEditHandler}>저장하기</button>
               <button onClick={onCancelButtonHandler}>취소하기</button>
-            </StControlButtons>
-          </StDetailInfo>
+            </div>
+          </div>
         </div>
       )}
     </div>

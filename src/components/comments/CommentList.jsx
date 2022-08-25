@@ -5,13 +5,14 @@ import Comment from "./Comment";
 import { useSelector, useDispatch } from "react-redux";
 import { __getCommentsList } from "../../redux/modules/commentSlice";
 import { useParams } from "react-router-dom";
+import "./CommentList.css"
 
 function CommentList() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const postId = id;
-  const commentList = useSelector((state) => state.comment.commentList);
-  console.log(commentList);
+  const commentList = useSelector((state) => state.comment?.commentList);
+  // console.log(commentList);
   const pageSize = 5;
   const [pageNum, setPageNum] = useState(0);
 
@@ -23,7 +24,7 @@ function CommentList() {
 
   return (
     <>
-      <Container>
+      <div className="stContainer">
         {commentList?.map((comment) => {
           return (
             <Fragment key={comment.id}>
@@ -31,7 +32,7 @@ function CommentList() {
             </Fragment>
           );
         })}
-      </Container>
+      </div>
     </>
   );
 }

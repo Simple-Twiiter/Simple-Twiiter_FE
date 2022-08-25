@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { __addComment } from "../../redux/modules/commentSlice";
 import styled from "styled-components";
 import Button from "../elements/Button";
+import "./AddForm.css"
 
 function AddForm() {
   const dispatch = useDispatch();
@@ -31,10 +32,9 @@ function AddForm() {
 
   return (
     <>
-      <Container>
-        <Form onSubmit={handleSubmit(onSubmitHandler)}>
+      <div className="stContainer">
+        <form className="stAddForm" onSubmit={handleSubmit(onSubmitHandler)}>
           <Input
-            inputred
             type="text"
             placeholder={"댓글을 입력해주세요. (5-100자)"}
             name="comment"
@@ -59,8 +59,8 @@ function AddForm() {
               )}
             </ErrorMsg>
           </ButtonWrapper>
-        </Form>
-      </Container>
+        </form>
+      </div>
     </>
   );
 }

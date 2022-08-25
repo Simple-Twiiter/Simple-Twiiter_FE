@@ -4,6 +4,7 @@ import Twit from "./Twit";
 import { useSelector, useDispatch } from "react-redux";
 import { __getPost } from "../../redux/modules/postSlice";
 import { useInView } from "react-intersection-observer";
+import "./TwitList.css"
 
 function TwitList() {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ function TwitList() {
 
   return (
     <div>
-      <TwitListBox>
+      <div className="twitListBox">
         {twits_fake &&
           twits_fake?.map((twit) => {
             return (
@@ -74,7 +75,7 @@ function TwitList() {
             );
           })}
         <div ref={ref} />
-      </TwitListBox>
+      </div>
     </div>
   );
 }

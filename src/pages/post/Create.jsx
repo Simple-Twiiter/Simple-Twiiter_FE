@@ -7,6 +7,7 @@ import Button from "../../components/elements/Button";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import RESP from "../../server/response";
+import "./Create.css"
 
 function Create() {
   const dispatch = useDispatch();
@@ -55,23 +56,23 @@ function Create() {
   }, [setFocus]);
 
   return (
-    <StCreateBox>
-      <Form onSubmit={handleSubmit(onSubmitHandler)}>
-        <StInputBox
+    <div className="stCreateBox">
+      <form className="createForm" onSubmit={handleSubmit(onSubmitHandler)}>
+        <input className="stInputBox"
           type="text"
           name="title"
           placeholder="제목"
           required
           {...register("title")}
         />
-        <StInputBox
+        <input className="stInputBox"
           type="text"
           name="contents"
           required
           {...register("contents")}
           placeholder="오늘은 어떤 일이 일어나고 있나요?"
         />
-        <StInputBox
+        <input className="stInputBox"
           id="fileInput"
           accept="image/*"
           placeholder="이미지 파일"
@@ -79,14 +80,14 @@ function Create() {
           {...register("imageUrl")}
           // style={{ display: "none" }}
         />
-        <TwitBox>
+        <div className="twitbigBox">
           {/* <TwitImageButton onClick={handleClick}>📸</TwitImageButton> */}
-          <StButton type="submit">Tweet</StButton>
-        </TwitBox>
+          <button className="stTweetButton" type="submit">Tweet</button>
+        </div>
 
-        <ImagePreview src={imagePreview} />
-      </Form>
-    </StCreateBox>
+        <img className="imagePreview" src={imagePreview} />
+      </form>
+    </div>
   );
 }
 

@@ -44,10 +44,10 @@ function SignUpForm() {
     });
     console.log(data)
     if(data.result) {
-      alert("완료!");
+      alert("회원가입 되었습니다.");
       navigate("/");
       } else {
-      alert("실패!");
+      alert("중복된 ID 입니다.");
       }
     // const { result, data, message } = RESP.SIGN_UP_SUCCESS;
     
