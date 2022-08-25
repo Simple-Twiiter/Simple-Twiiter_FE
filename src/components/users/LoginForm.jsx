@@ -26,23 +26,26 @@ function LoginForm() {
   };
 
   //  antd 는 e.preventDefault() 자동으로 탑재되어있으므로 안써도 됨
-  const onSubmitHandler = useCallback(async (e) => {
+  const onSubmitHandler = async (e) => {
     // axios 통신후 결과가 true이면
     const { result, data, headers, message } = await axios({
       method: "post",
-      url: `${URI.BASE}/api/user/login`,
+      url: `http://54.180.143.106/api/user/login`,
       data: user,
     });
+    console.log(data)
     // const { result, data, headers, message } = RESP.LOGIN_SUCCESS;
     if (data.result) {
+      alert("로그인 성공")
       const { authorization, refreshtoken } = headers;
       dispatch(login(data.data));
       localStorage.setItem("Authorization", authorization);
       localStorage.setItem("RefreshToken", refreshtoken);
       localStorage.setItem("username", data.data.username);
     } else {
+      alert("로그인 실패")
     }
-  }, []);
+  };
 
   return (
     // onFinish가 onSubmit임.

@@ -14,6 +14,7 @@ function SignUpForm() {
     BASE: process.env.REACT_APP_BASE_URI,
   };
 
+  // console.log(URI)
   const {
     register,
     handleSubmit,
@@ -35,15 +36,23 @@ function SignUpForm() {
     fd.append("imgFile", imageUrl[0]);
     const { result, data, message } = await axios({
       method: "post",
-      url: `${URI.BASE}/api/user/signup`,
+      url: `http://54.180.143.106/api/user/signup`,
       data: fd,
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
+    console.log(data)
+    if(data.result) {
+      alert("완료!");
+      navigate("/");
+      } else {
+      alert("실패!");
+      }
     // const { result, data, message } = RESP.SIGN_UP_SUCCESS;
-    navigate("/");
+    
   };
+
 
   const handleClick = (e) => {
     let myInput = document.getElementById("fileInput");

@@ -28,14 +28,14 @@ export const __getPost = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URI.BASE}/api/post?page=0&pageSize=100`,
+        url: `http://54.180.143.106/api/post?page=0&pageSize=100`,
         headers: {
           Authorization: localStorage.getItem("Authorization"),
           RefreshToken: localStorage.getItem("RefreshToken"),
           "Content-Type": "application/json",
         },
       });
-      console.log(data);
+      // console.log(data);
       // const { data } = RES.GET_POSTS_SUCCESS;
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
@@ -50,7 +50,7 @@ export const __getSinglePost = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URI.BASE}/api/post/${arg.postId}`,
+        url: `http://54.180.143.106/api/post/${arg.postId}`,
         headers: {
           Authorization: localStorage.getItem("Authorization"),
           RefreshToken: localStorage.getItem("RefreshToken"),
@@ -69,10 +69,11 @@ export const __getSinglePost = createAsyncThunk(
 export const __postPost = createAsyncThunk(
   "post/__postPost",
   async (arg, thunkAPI) => {
+    console.log(arg)
     try {
       const { data } = await axios({
         method: "post",
-        url: `${URI.BASE}/api/post`,
+        url: `http://54.180.143.106/api/post`,
         data: arg,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -81,6 +82,7 @@ export const __postPost = createAsyncThunk(
         },
       });
       // const { data } = RES.ADD_POST_SUCCESS;
+      console.log(data)
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -94,7 +96,7 @@ export const __deletePost = createAsyncThunk(
     try {
       await axios({
         method: "delete",
-        url: `${URI.BASE}/api/post/${arg}`,
+        url: `http://54.180.143.106/api/post/${arg}`,
         headers: config,
       });
       // const { data } = RES.DELETE_POST_SUCCESS;
@@ -108,13 +110,15 @@ export const __deletePost = createAsyncThunk(
 export const __updatePost = createAsyncThunk(
   "post/__updatePost",
   async (arg, thunkAPI) => {
+    console.log(arg)
     try {
-      const { data } = axios({
+      const {data} = await axios({
         method: "put",
-        url: `${URI.BASE}/api/post/${arg.id}`,
+        url: `http://54.180.143.106/api/post/${arg.id}`,
         data: arg.data,
         headers: config,
       });
+      console.log(data)
       // const { data } = RES.UPDATE_POST_SUCCESS;
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {

@@ -35,7 +35,7 @@ function UserProfile() {
 
     const { result, data, headers } = await axios({
       method: "post",
-      url: `${URI.BASE}/api/logout`,
+      url: `http://54.180.143.106/api/logout`,
       headers: {
         Authorization: localStorage.getItem("Authorization"),
         RefreshToken: localStorage.getItem("RefreshToken"),
@@ -53,6 +53,8 @@ function UserProfile() {
   useEffect(() => {
     dispatch(__getSingleUser({ memberId: username }));
   });
+
+
 
   return (
     <Card
@@ -74,7 +76,7 @@ function UserProfile() {
         </div>,
       ]}
     >
-      <Card.Meta avatar={<Avatar>Crystal</Avatar>} title="Crystal" />
+      <Card.Meta avatar={<Avatar>Crystal</Avatar>} title={username} />
       <Button content={"로그아웃"} size={"small"} onClick={onLogoutHandler} />
     </Card>
   );

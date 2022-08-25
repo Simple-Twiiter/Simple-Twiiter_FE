@@ -26,7 +26,7 @@ function CommentList() {
       <Container>
         {commentList?.map((comment) => {
           return (
-            <Fragment key={comment.commentId}>
+            <Fragment key={comment.id}>
               <Comment comment={comment} postId={postId} />
             </Fragment>
           );

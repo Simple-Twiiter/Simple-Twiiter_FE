@@ -19,7 +19,7 @@ export const __getCommentsList = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "get",
-        url: `${URI.BASE}/api/comment/${arg.id}`,
+        url: `http://54.180.143.106/api/comment/${arg.id}`,
         headers: {
           Authorization: localStorage.getItem("Authorization"),
           RefreshToken: localStorage.getItem("RefreshToken"),
@@ -44,7 +44,7 @@ export const __addComment = createAsyncThunk(
     try {
       const { data } = await axios({
         method: "post",
-        url: `${URI.BASE}/api/comment/${arg.postId}`,
+        url: `http://54.180.143.106/api/comment/${arg.postId}`,
         data: {
           content: arg.comment,
         },
@@ -67,7 +67,7 @@ export const __updateComment = createAsyncThunk(
       // /api/comment/{commentId}/{postId}
       const { data } = await axios({
         method: "put",
-        url: `${URI.BASE}/api/comment/${arg.commentId}/${arg.postId}`,
+        url: `http://54.180.143.106/api/comment/${arg.commentId}/${arg.postId}`,
         data: {
           content: arg.comment,
         },
@@ -90,7 +90,7 @@ export const __deleteComment = createAsyncThunk(
     try {
       await axios({
         method: "delete",
-        url: `${URI.BASE}/api/comment/${arg}`,
+        url: `http://54.180.143.106/api/comment/${arg}`,
         headers: config,
       });
       return thunkAPI.fulfillWithValue(arg);

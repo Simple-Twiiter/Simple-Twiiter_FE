@@ -25,7 +25,7 @@ const LikeBtn = ({ isLike, isLogin, postId, heart }) => {
     if (!liked) {
       const { result, data, message } = await axios({
         method: "post",
-        url: `${URI.BASE}/api/postLike/${postId}`,
+        url: `http://54.180.143.106/api/postLike/${postId}`,
         headers: {
           Authorization: localStorage.getItem("Authorization"),
           RefreshToken: localStorage.getItem("RefreshToken"),
@@ -42,7 +42,7 @@ const LikeBtn = ({ isLike, isLogin, postId, heart }) => {
     } else {
       const { result, data, message } = await axios({
         method: "delete",
-        url: `${URI.BASE}/api/postLike/${postId}`,
+        url: `http://54.180.143.106/api/postLike/${postId}`,
         headers: {
           Authorization: localStorage.getItem("accessToken"),
           RefreshToken: localStorage.getItem("refreshToken"),

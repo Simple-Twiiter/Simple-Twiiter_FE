@@ -70,6 +70,9 @@ function DetailInfo() {
     });
     setIsShow();
   };
+  const username2 = localStorage.getItem("username")
+
+
 
   return (
     <div>
@@ -80,7 +83,7 @@ function DetailInfo() {
             <Stkim>
               <StkimProp onClick={openbox}>...</StkimProp>
             </Stkim>
-            {isLogin && isMine && isShow && (
+            {isLogin && (twitDetail?.member?.username === username2) && (
               <StUpdateBox>
                 <button onClick={onEditHandler}>수정</button>
                 <button
@@ -97,7 +100,7 @@ function DetailInfo() {
                   삭제
                 </button>
               </StUpdateBox>
-            )}
+             )} 
             <StUserBox>
               <UserImgBox>
                 <UserImage src={twitDetail.member?.userImg}></UserImage>
@@ -105,7 +108,7 @@ function DetailInfo() {
               <div>{twitDetail.member?.username}</div>
             </StUserBox>
             <div>{twitDetail.title}</div>
-            <div>{twitDetail.content}</div>
+            <div>{twitDetail.contents}</div>
             <Img src={twitDetail.imgUrl}></Img>
             <div>{twitDetail.createdAt}</div>
           </StDetailInfo>

@@ -59,11 +59,14 @@ function TwitList() {
     }
   }, [inView]);
 
+  // console.log(twits_fake)
+
+
   return (
     <div>
       <TwitListBox>
         {twits_fake &&
-          twits_fake.map((twit) => {
+          twits_fake?.map((twit) => {
             return (
               <Fragment key={twit.id}>
                 <Twit twit={twit} key={twit.id} />
